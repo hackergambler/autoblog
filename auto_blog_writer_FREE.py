@@ -224,21 +224,104 @@ def get_blogger_service():
     return build("blogger", "v3", credentials=creds)
 
 
+def get_unsplash_image(topic: str) -> str:
+    """Fetches a free relevant image from Unsplash"""
+    import urllib.request
+    import urllib.parse
+
+    try:
+        # Use Unsplash source - completely free, no API key needed!
+        search_query = urllib.parse.quote(topic.split()[0:3].__str__().replace("[","").replace("]","").replace("'","").replace(",",""))
+        # Pick a random image each time using a seed
+        seed = random.randint(1, 1000)
+        image_url = f"https://source.unsplash.com/800x400/?{urllib.parse.quote(topic)}&sig={seed}"
+        return image_url
+    except:
+        return ""
+
+
+def get_category_color(category: str) -> dict:
+    """Returns beautiful color scheme based on category"""
+    colors = {
+        "Technology & AI":          {"bg": "#0f172a", "accent": "#6366f1", "badge": "#818cf8", "text": "#e2e8f0"},
+        "Health & Fitness":         {"bg": "#052e16", "accent": "#22c55e", "badge": "#4ade80", "text": "#dcfce7"},
+        "Money & Finance":          {"bg": "#1c1917", "accent": "#f59e0b", "badge": "#fbbf24", "text": "#fef3c7"},
+        "Motivational & Life Tips": {"bg": "#4a044e", "accent": "#e879f9", "badge": "#f0abfc", "text": "#fae8ff"},
+        "Food & Cooking":           {"bg": "#431407", "accent": "#f97316", "badge": "#fb923c", "text": "#ffedd5"},
+        "Travel & Adventure":       {"bg": "#0c4a6e", "accent": "#38bdf8", "badge": "#7dd3fc", "text": "#e0f2fe"},
+        "Education & Self Improvement": {"bg": "#1e1b4b", "accent": "#a78bfa", "badge": "#c4b5fd", "text": "#ede9fe"},
+    }
+    return colors.get(category, {"bg": "#1e293b", "accent": "#64748b", "badge": "#94a3b8", "text": "#f1f5f9"})
+
+
 def publish_to_blogger(blog_data: dict) -> str:
-    """Publishes the blog post to Blogger.com"""
+    """Publishes beautifully styled blog post with image to Blogger.com"""
 
     service = get_blogger_service()
 
+    # Get free image and colors
+    image_url = get_unsplash_image(blog_data['topic'])
+    colors = get_category_color(blog_data['category'])
+    now = datetime.datetime.now().strftime("%B %d, %Y")
+
     full_content = f"""
-<div style="font-family: Georgia, serif; max-width: 800px; margin: 0 auto; line-height: 1.8; color: #333;">
-    <p style="background:#f0f7ff; padding:15px; border-left:4px solid #4a90e2; border-radius:4px;">
-        <em>Category: {blog_data['category']} | Published by Auto Blog Writer</em>
-    </p>
-    {blog_data['content']}
-    <hr style="margin:30px 0; border:none; border-top:1px solid #eee;"/>
-    <p style="color:#888; font-size:0.9em; text-align:center;">
-        Published on {datetime.datetime.now().strftime("%B %d, %Y at %I:%M %p")}
-    </p>
+<div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 860px; margin: 0 auto; color: #1a1a2e; line-height: 1.8;">
+
+  <!-- HERO SECTION with image -->
+  <div style="position:relative; border-radius:16px; overflow:hidden; margin-bottom:32px; box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <img src="{image_url}" alt="{blog_data['topic']}" style="width:100%; height:340px; object-fit:cover; display:block;"/>
+    <div style="position:absolute; inset:0; background:linear-gradient(to top, {colors['bg']}ee, transparent 50%);"></div>
+    <div style="position:absolute; bottom:0; left:0; right:0; padding:28px;">
+      <span style="background:{colors['accent']}; color:white; padding:5px 14px; border-radius:20px; font-size:12px; font-weight:700; letter-spacing:1px; text-transform:uppercase;">
+        {blog_data['category']}
+      </span>
+      <p style="color:#cbd5e1; font-size:13px; margin:10px 0 0 0;">📅 {now}</p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT CARD -->
+  <div style="background:#ffffff; border-radius:16px; padding:40px; box-shadow:0 4px 24px rgba(0,0,0,0.08); border:1px solid #f1f5f9;">
+
+    <!-- Category badge -->
+    <div style="display:inline-flex; align-items:center; gap:8px; background:{colors['bg']}15; border:1px solid {colors['accent']}40; border-radius:8px; padding:8px 16px; margin-bottom:24px;">
+      <span style="width:8px; height:8px; border-radius:50%; background:{colors['accent']}; display:inline-block;"></span>
+      <span style="color:{colors['bg']}; font-size:13px; font-weight:600;">{blog_data['category']}</span>
+    </div>
+
+    <!-- Blog content with beautiful styling -->
+    <div style="
+      color: #374151;
+      font-size: 17px;
+      line-height: 1.9;
+    ">
+      <style scoped>
+        h2 {{ color: {colors['bg']}; font-size: 22px; font-weight: 700; margin: 32px 0 12px; padding-left: 14px; border-left: 4px solid {colors['accent']}; }}
+        p {{ margin: 0 0 18px; }}
+        ul, ol {{ padding-left: 24px; margin-bottom: 18px; }}
+        li {{ margin-bottom: 8px; }}
+        strong {{ color: {colors['bg']}; }}
+      </style>
+      {blog_data['content']}
+    </div>
+
+    <!-- Divider -->
+    <hr style="border:none; border-top:2px solid #f1f5f9; margin:36px 0;"/>
+
+    <!-- Tags -->
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;">
+      {''.join([f'<span style="background:{colors["bg"]}12; color:{colors["bg"]}; border:1px solid {colors["accent"]}30; padding:4px 12px; border-radius:20px; font-size:13px;">#{tag}</span>' for tag in blog_data.get('tags', [])])}
+    </div>
+
+    <!-- Footer -->
+    <div style="background:linear-gradient(135deg, {colors['bg']}, {colors['bg']}dd); border-radius:12px; padding:20px 24px; display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <p style="color:{colors['badge']}; font-size:13px; margin:0 0 4px;">Auto-published by AI Blog Writer</p>
+        <p style="color:{colors['text']}; font-size:12px; margin:0; opacity:0.7;">{now} • {blog_data['category']}</p>
+      </div>
+      <span style="font-size:28px;">✍️</span>
+    </div>
+
+  </div>
 </div>
 """
 
