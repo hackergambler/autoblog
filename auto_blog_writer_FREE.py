@@ -316,7 +316,7 @@ def publish_to_blogger(blog_data: dict) -> str:
     <!-- Footer -->
     <div style="background:linear-gradient(135deg, {colors['bg']}, {colors['bg']}dd); border-radius:12px; padding:20px 24px; display:flex; align-items:center; justify-content:space-between;">
       <div>
-        <p style="color:{colors['badge']}; font-size:13px; margin:0 0 4px;">Auto-published by AI Blog Writer</p>
+        <p style="color:{colors['badge']}; font-size:13px; margin:0 0 4px;">published by MYRQ Blog Writer</p>
         <p style="color:{colors['text']}; font-size:12px; margin:0; opacity:0.7;">{now} • {blog_data['category']}</p>
       </div>
       <span style="font-size:28px;">✍️</span>
