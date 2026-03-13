@@ -31,8 +31,8 @@ from googleapiclient.discovery import build
 # 🔧 YOUR SETTINGS
 # ============================================================
 
-GROQ_API_KEY    = "paste_your_groq_api_key_here"       # Same key from console.groq.com
-BLOGGER_BLOG_ID = "paste_new_civilization_blog_id"     # NEW blog ID from Blogger
+GROQ_API_KEY    = "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"       # Same key from console.groq.com
+BLOGGER_BLOG_ID = "998461773101344795"     # NEW blog ID from Blogger
 
 POST_EVERY_MINUTES = 30   # Every 30 minutes = 48 posts/day
 
