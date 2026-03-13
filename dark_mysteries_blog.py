@@ -357,26 +357,67 @@ def get_blogger_service():
 
 
 def get_topic_image(topic: str, category: str) -> str:
-    """Get a reliable topic-matched image using Unsplash Source — instant, free, no API key."""
-    import urllib.parse
-    # Map each category to the best Unsplash search keyword
-    category_keywords = {
-        "Ghost Stories & Hauntings":         "haunted abandoned dark gothic",
-        "Dark Rituals & Occult":             "candles dark mystical occult",
-        "Unsolved Mysteries & Conspiracies": "mystery dark fog night",
-        "Paranormal & Supernatural":         "dark eerie supernatural fog",
-        "Cursed Objects & Places":           "dark horror abandoned ruins",
-        "Urban Legends & Folklore":          "dark forest night creature",
-        "True Crime & Dark History":         "dark city night crime noir",
+    """Pick a curated, always-working image matched to the category."""
+    IMAGE_POOL = {
+        "Ghost Stories & Hauntings": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Winchester_Mystery_House.jpg/800px-Winchester_Mystery_House.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Alcatraz_Island_photo_D_Ramey_Logan.jpg/800px-Alcatraz_Island_photo_D_Ramey_Logan.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Eastern_State_Penitentiary_main_entrance.jpg/800px-Eastern_State_Penitentiary_main_entrance.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Edinburghs_underground_vaults.jpg/800px-Edinburghs_underground_vaults.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Highgate_Cemetery_-_geograph.org.uk_-_1070814.jpg/800px-Highgate_Cemetery_-_geograph.org.uk_-_1070814.jpg",
+        ],
+        "Dark Rituals & Occult": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Candles_and_a_skull.jpg/800px-Candles_and_a_skull.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Altar_of_Mysteries_Pompeii.jpg/800px-Altar_of_Mysteries_Pompeii.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Stonehenge2007_07_30.jpg/800px-Stonehenge2007_07_30.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat_03.jpg/800px-Cat_03.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Codex_Gigas_devil.jpg/400px-Codex_Gigas_devil.jpg",
+        ],
+        "Unsolved Mysteries & Conspiracies": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg/400px-Mona_Lisa%2C_by_Leonardo_da_Vinci%2C_from_C2RMF_retouched.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Voynich_Manuscript_%28166%29.jpg/800px-Voynich_Manuscript_%28166%29.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Nazca_monkey.jpg/800px-Nazca_monkey.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/The_Bermuda_Triangle.jpg/800px-The_Bermuda_Triangle.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Stonehenge_at_dusk.jpg/800px-Stonehenge_at_dusk.jpg",
+        ],
+        "Paranormal & Supernatural": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Edinburghs_underground_vaults.jpg/800px-Edinburghs_underground_vaults.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Abandoned_house.jpg/800px-Abandoned_house.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Highgate_Cemetery_-_geograph.org.uk_-_1070814.jpg/800px-Highgate_Cemetery_-_geograph.org.uk_-_1070814.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Stonehenge2007_07_30.jpg/800px-Stonehenge2007_07_30.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Alcatraz_Island_photo_D_Ramey_Logan.jpg/800px-Alcatraz_Island_photo_D_Ramey_Logan.jpg",
+        ],
+        "Cursed Objects & Places": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Hope_Diamond.jpg/400px-Hope_Diamond.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Tutankhamun_Egyptian_Museum.jpg/400px-Tutankhamun_Egyptian_Museum.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Koh-i-Noor_replica.jpg/400px-Koh-i-Noor_replica.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Eastern_State_Penitentiary_main_entrance.jpg/800px-Eastern_State_Penitentiary_main_entrance.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Winchester_Mystery_House.jpg/800px-Winchester_Mystery_House.jpg",
+        ],
+        "Urban Legends & Folklore": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Stonehenge_at_dusk.jpg/800px-Stonehenge_at_dusk.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Stonehenge2007_07_30.jpg/800px-Stonehenge2007_07_30.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Nazca_monkey.jpg/800px-Nazca_monkey.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Voynich_Manuscript_%28166%29.jpg/800px-Voynich_Manuscript_%28166%29.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Abandoned_house.jpg/800px-Abandoned_house.jpg",
+        ],
+        "True Crime & Dark History": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Eastern_State_Penitentiary_main_entrance.jpg/800px-Eastern_State_Penitentiary_main_entrance.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Alcatraz_Island_photo_D_Ramey_Logan.jpg/800px-Alcatraz_Island_photo_D_Ramey_Logan.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Edinburghs_underground_vaults.jpg/800px-Edinburghs_underground_vaults.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Codex_Gigas_devil.jpg/400px-Codex_Gigas_devil.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Highgate_Cemetery_-_geograph.org.uk_-_1070814.jpg/800px-Highgate_Cemetery_-_geograph.org.uk_-_1070814.jpg",
+        ],
     }
-    # Extract first 3 meaningful words from topic for extra specificity
-    topic_words = [w for w in topic.replace("—","").replace("-","").split() if len(w) > 3][:3]
-    topic_hint  = " ".join(topic_words)
-    base_kw     = category_keywords.get(category, "dark mysterious horror")
-    query       = urllib.parse.quote(f"{topic_hint} {base_kw}")
-    # Unsplash Source — returns a real relevant photo instantly, no API key needed
-    seed = abs(hash(topic)) % 1000   # consistent image per topic
-    return f"https://source.unsplash.com/800x400/?{query}&sig={seed}"
+    default_pool = [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Stonehenge2007_07_30.jpg/800px-Stonehenge2007_07_30.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Stonehenge_at_dusk.jpg/800px-Stonehenge_at_dusk.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Abandoned_house.jpg/800px-Abandoned_house.jpg",
+    ]
+    pool = IMAGE_POOL.get(category, default_pool)
+    # Use topic hash so same topic always gets same image
+    idx = abs(hash(topic)) % len(pool)
+    return pool[idx]
 
 
 def publish_to_blogger(blog_data: dict) -> str:

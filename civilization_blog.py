@@ -359,27 +359,74 @@ def get_blogger_service():
 
 
 def get_topic_image(topic: str, category: str) -> str:
-    """Get a reliable topic-matched image using Unsplash Source — instant, free, no API key."""
-    import urllib.parse
-    # Map each category to the best Unsplash search keywords
-    category_keywords = {
-        "Ancient Civilizations":          "ancient ruins civilization history",
-        "Lost & Mystery Civilizations":   "ancient ruins lost jungle mystery",
-        "Medieval Civilizations":         "medieval castle fortress stone",
-        "Wars & Conquests":               "ancient battle war armor sword",
-        "Empires & Dynasties":            "palace empire dynasty architecture",
-        "Inventions & Discoveries":       "ancient history science discovery",
-        "Religion & Philosophy":          "ancient temple religion sacred",
-        "Great Leaders & Conquerors":     "ancient warrior leader history",
+    """Pick a curated, always-working image matched to the category."""
+    IMAGE_POOL = {
+        "Ancient Civilizations": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/800px-Kheops-Pyramid.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/800px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Parthenon_from_west.jpg/800px-Parthenon_from_west.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camponotus_flavomarginatus_ant.jpg/800px-Camponotus_flavomarginatus_ant.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Great_Wall_of_China_July_2006.jpg/800px-Great_Wall_of_China_July_2006.jpg",
+        ],
+        "Lost & Mystery Civilizations": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Nazca_monkey.jpg/800px-Nazca_monkey.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Machu_Picchu%2C_Peru.jpg/800px-Machu_Picchu%2C_Peru.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Stonehenge_at_dusk.jpg/800px-Stonehenge_at_dusk.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Stonehenge2007_07_30.jpg/800px-Stonehenge2007_07_30.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Voynich_Manuscript_%28166%29.jpg/800px-Voynich_Manuscript_%28166%29.jpg",
+        ],
+        "Medieval Civilizations": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Notre-Dame_de_Paris_2013-07-24.jpg/800px-Notre-Dame_de_Paris_2013-07-24.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Carcassonne_Castle_and_Town.jpg/800px-Carcassonne_Castle_and_Town.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Bodiam-castle-10My8-1197.jpg/800px-Bodiam-castle-10My8-1197.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Neuschwanstein_Castle_Schwangau_Germany_Luc_Viatour.jpg/800px-Neuschwanstein_Castle_Schwangau_Germany_Luc_Viatour.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Hagia_Sophia_Mars_2013.jpg/800px-Hagia_Sophia_Mars_2013.jpg",
+        ],
+        "Wars & Conquests": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Sto%C5%99ov%C3%A9_v%C3%A1lky.jpg/800px-Sto%C5%99ov%C3%A9_v%C3%A1lky.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/800px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Bodiam-castle-10My8-1197.jpg/800px-Bodiam-castle-10My8-1197.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Great_Wall_of_China_July_2006.jpg/800px-Great_Wall_of_China_July_2006.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Stonehenge_at_dusk.jpg/800px-Stonehenge_at_dusk.jpg",
+        ],
+        "Empires & Dynasties": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/800px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/800px-Kheops-Pyramid.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Hagia_Sophia_Mars_2013.jpg/800px-Hagia_Sophia_Mars_2013.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Great_Wall_of_China_July_2006.jpg/800px-Great_Wall_of_China_July_2006.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Neuschwanstein_Castle_Schwangau_Germany_Luc_Viatour.jpg/800px-Neuschwanstein_Castle_Schwangau_Germany_Luc_Viatour.jpg",
+        ],
+        "Inventions & Discoveries": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Parthenon_from_west.jpg/800px-Parthenon_from_west.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/800px-Kheops-Pyramid.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Voynich_Manuscript_%28166%29.jpg/800px-Voynich_Manuscript_%28166%29.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Nazca_monkey.jpg/800px-Nazca_monkey.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Great_Wall_of_China_July_2006.jpg/800px-Great_Wall_of_China_July_2006.jpg",
+        ],
+        "Religion & Philosophy": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Hagia_Sophia_Mars_2013.jpg/800px-Hagia_Sophia_Mars_2013.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Notre-Dame_de_Paris_2013-07-24.jpg/800px-Notre-Dame_de_Paris_2013-07-24.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Parthenon_from_west.jpg/800px-Parthenon_from_west.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Machu_Picchu%2C_Peru.jpg/800px-Machu_Picchu%2C_Peru.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/800px-Kheops-Pyramid.jpg",
+        ],
+        "Great Leaders & Conquerors": [
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/800px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Bodiam-castle-10My8-1197.jpg/800px-Bodiam-castle-10My8-1197.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/800px-Kheops-Pyramid.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Great_Wall_of_China_July_2006.jpg/800px-Great_Wall_of_China_July_2006.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Machu_Picchu%2C_Peru.jpg/800px-Machu_Picchu%2C_Peru.jpg",
+        ],
     }
-    # Extract first 3 meaningful words from topic for extra specificity
-    topic_words = [w for w in topic.replace("—","").replace("-","").split() if len(w) > 3][:3]
-    topic_hint  = " ".join(topic_words)
-    base_kw     = category_keywords.get(category, "ancient civilization history ruins")
-    query       = urllib.parse.quote(f"{topic_hint} {base_kw}")
-    # Unsplash Source — returns a real relevant photo instantly, no API key needed
-    seed = abs(hash(topic)) % 1000   # consistent image per topic
-    return f"https://source.unsplash.com/800x400/?{query}&sig={seed}"
+    default_pool = [
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/800px-Kheops-Pyramid.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/800px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg",
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Machu_Picchu%2C_Peru.jpg/800px-Machu_Picchu%2C_Peru.jpg",
+    ]
+    pool = IMAGE_POOL.get(category, default_pool)
+    # Use topic hash so same topic always gets same image
+    idx = abs(hash(topic)) % len(pool)
+    return pool[idx]
 
 
 def publish_to_blogger(blog_data: dict) -> str:
