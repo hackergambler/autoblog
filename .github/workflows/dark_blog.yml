@@ -2,8 +2,8 @@ name: Dark Mysteries Blog — Auto Post
 
 on:
   schedule:
-    - cron: '0,30 * * * *'   # Every 30 minutes, 24/7
-  workflow_dispatch:           # Manual trigger from GitHub UI
+    - cron: '0,30 * * * *'
+  workflow_dispatch:
 
 jobs:
   post:
@@ -24,7 +24,10 @@ jobs:
       - name: Write token.json from secret
         run: echo '${{ secrets.GOOGLE_TOKEN_JSON }}' > token.json
 
-      - name: Run blog writer
+      - name: Verify token.json
+        run: python3 -c "import json; json.load(open('token.json')); print('✅ token.json is valid')"
+
+      - name: Run Dark Mysteries blog
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           BLOGGER_BLOG_ID: ${{ secrets.DARK_BLOGGER_BLOG_ID }}
