@@ -443,16 +443,12 @@ def publish_to_blogger(blog_data: dict) -> str:
     full_content = f"""
 <div style="font-family:'Segoe UI',Georgia,serif; max-width:860px; margin:0 auto; color:#1a1a1a; line-height:1.85;">
 
-  <!-- HERO IMAGE -->
-  <div style="position:relative; border-radius:14px; overflow:hidden; margin-bottom:30px; box-shadow:0 20px 60px rgba(0,0,0,0.4);">
-    <img src="{img_url}" alt="{blog_data['topic']}" style="width:100%; height:360px; object-fit:cover; display:block; filter:sepia(30%) contrast(110%);"/>
-    <div style="position:absolute; inset:0; background:linear-gradient(to top, {style['bg']}f0 0%, transparent 55%);"></div>
-    <div style="position:absolute; bottom:0; left:0; right:0; padding:28px;">
-      <span style="background:{style['accent']}; color:#fff; padding:5px 16px; border-radius:20px; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;">
-        🏛️ {blog_data['category']}
-      </span>
-      <p style="color:rgba(255,255,255,0.8); font-size:13px; margin:10px 0 0;">📅 {now_str}</p>
-    </div>
+  <!-- HEADER BANNER (no external image) -->
+  <div style="background:linear-gradient(135deg,{style['bg']},{style['accent']}33); padding:32px 36px 24px; border-radius:14px; margin-bottom:30px; box-shadow:0 4px 24px rgba(0,0,0,0.12);">
+    <span style="background:{style['accent']}; color:#fff; padding:5px 16px; border-radius:20px; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;">
+      🏛️ {blog_data['category']}
+    </span>
+    <p style="color:rgba(255,255,255,0.8); font-size:13px; margin:12px 0 0;">📅 {now_str}</p>
   </div>
 
   <!-- CONTENT CARD -->
