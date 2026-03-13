@@ -31,8 +31,8 @@ from googleapiclient.discovery import build
 # 🔧 YOUR SETTINGS
 # ============================================================
 
-GROQ_API_KEY    = "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"       # Same key from console.groq.com
-BLOGGER_BLOG_ID = "998461773101344795"     # NEW blog ID from Blogger
+GROQ_API_KEY    = os.environ.get("GROQ_API_KEY",    "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")
+BLOGGER_BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "998461773101344795")
 
 POST_EVERY_MINUTES = 30   # Every 30 minutes = 48 posts/day
 
@@ -341,21 +341,47 @@ def get_blogger_service():
         creds = Credentials.from_authorized_user_file("token.json", SCOPES)
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
+            try:
+                creds.refresh(Request())
+                with open("token.json", "w") as token:
+                    token.write(creds.to_json())
+                print("🔄  Token refreshed successfully")
+            except Exception as e:
+                print(f"⚠️  Token refresh failed: {e} — re-authenticating...")
+                creds = None
+        if not creds:
             flow = InstalledAppFlow.from_client_secrets_file("credentials.json", SCOPES)
             creds = flow.run_local_server(port=0)
-        with open("token.json", "w") as token:
-            token.write(creds.to_json())
+            with open("token.json", "w") as token:
+                token.write(creds.to_json())
+            print("✅  New token saved")
     return build("blogger", "v3", credentials=creds)
+
+
+def get_topic_image(topic: str, category: str) -> str:
+    """Generate a topic-matched image using Pollinations AI — 100% free, no API key needed."""
+    import urllib.parse
+    style_keywords = {
+        "Ancient Civilizations":          "ancient civilization epic cinematic dramatic ruins golden hour",
+        "Lost & Mystery Civilizations":   "lost mysterious ancient ruins jungle fog dramatic atmospheric",
+        "Medieval Civilizations":         "medieval castle epic dramatic dark stormy cinematic",
+        "Wars & Conquests":               "epic ancient battle war dramatic cinematic smoke fire",
+        "Empires & Dynasties":            "empire dynasty palace golden majestic cinematic dramatic",
+        "Inventions & Discoveries":       "ancient invention discovery dramatic cinematic historic",
+        "Religion & Philosophy":          "ancient temple sacred mystical dramatic golden light",
+        "Great Leaders & Conquerors":     "epic leader conqueror dramatic portrait cinematic historic",
+    }
+    style = style_keywords.get(category, "ancient civilization epic cinematic dramatic historic")
+    prompt = f"{topic}, {style}, highly detailed, photorealistic, 4K"
+    encoded = urllib.parse.quote(prompt)
+    return f"https://image.pollinations.ai/prompt/{encoded}?width=800&height=400&nologo=true"
 
 
 def publish_to_blogger(blog_data: dict) -> str:
     service = get_blogger_service()
 
     style   = get_category_style(blog_data["category"])
-    seed    = random.randint(1, 9999)
-    img_url = f"https://picsum.photos/seed/{seed}/800/400"
+    img_url = get_topic_image(blog_data["topic"], blog_data["category"])
     ist = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
     now_str = datetime.datetime.now(ist).strftime("%B %d, %Y")
 
@@ -485,8 +511,12 @@ def write_and_publish():
             json.dump(logs, f, indent=2)
         print(f"📊  Total posts: {len(logs)}")
 
+    except KeyboardInterrupt:
+        raise
     except Exception as e:
+        import traceback
         print(f"❌  Error: {e}")
+        print(traceback.format_exc())
         print("⏳  Will retry next time...")
 
 
@@ -501,11 +531,8 @@ if __name__ == "__main__":
     print("=" * 55)
 
     if "--once" in sys.argv:
-        if os.environ.get("GROQ_API_KEY"):
-            GROQ_API_KEY = os.environ["GROQ_API_KEY"]
-        if os.environ.get("BLOGGER_BLOG_ID"):
-            BLOGGER_BLOG_ID = os.environ["BLOGGER_BLOG_ID"]
         print("☁️   GitHub Actions mode — single post\n")
+        print(f"🔑  Using Blog ID: {BLOGGER_BLOG_ID}")
         write_and_publish()
     else:
         print(f"📅  Posting every {POST_EVERY_MINUTES} minutes (48 posts/day)")
@@ -513,5 +540,8 @@ if __name__ == "__main__":
         write_and_publish()
         schedule.every(POST_EVERY_MINUTES).minutes.do(write_and_publish)
         while True:
-            schedule.run_pending()
-            time.sleep(30)
+            try:
+                schedule.run_pending()
+            except Exception as e:
+                print(f"⚠️  Scheduler error (continuing): {e}")
+            time.sleep(1)
