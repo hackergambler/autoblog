@@ -359,22 +359,27 @@ def get_blogger_service():
 
 
 def get_topic_image(topic: str, category: str) -> str:
-    """Generate a topic-matched image using Pollinations AI — 100% free, no API key needed."""
+    """Get a reliable topic-matched image using Unsplash Source — instant, free, no API key."""
     import urllib.parse
-    style_keywords = {
-        "Ancient Civilizations":          "ancient civilization epic cinematic dramatic ruins golden hour",
-        "Lost & Mystery Civilizations":   "lost mysterious ancient ruins jungle fog dramatic atmospheric",
-        "Medieval Civilizations":         "medieval castle epic dramatic dark stormy cinematic",
-        "Wars & Conquests":               "epic ancient battle war dramatic cinematic smoke fire",
-        "Empires & Dynasties":            "empire dynasty palace golden majestic cinematic dramatic",
-        "Inventions & Discoveries":       "ancient invention discovery dramatic cinematic historic",
-        "Religion & Philosophy":          "ancient temple sacred mystical dramatic golden light",
-        "Great Leaders & Conquerors":     "epic leader conqueror dramatic portrait cinematic historic",
+    # Map each category to the best Unsplash search keywords
+    category_keywords = {
+        "Ancient Civilizations":          "ancient ruins civilization history",
+        "Lost & Mystery Civilizations":   "ancient ruins lost jungle mystery",
+        "Medieval Civilizations":         "medieval castle fortress stone",
+        "Wars & Conquests":               "ancient battle war armor sword",
+        "Empires & Dynasties":            "palace empire dynasty architecture",
+        "Inventions & Discoveries":       "ancient history science discovery",
+        "Religion & Philosophy":          "ancient temple religion sacred",
+        "Great Leaders & Conquerors":     "ancient warrior leader history",
     }
-    style = style_keywords.get(category, "ancient civilization epic cinematic dramatic historic")
-    prompt = f"{topic}, {style}, highly detailed, photorealistic, 4K"
-    encoded = urllib.parse.quote(prompt)
-    return f"https://image.pollinations.ai/prompt/{encoded}?width=800&height=400&nologo=true"
+    # Extract first 3 meaningful words from topic for extra specificity
+    topic_words = [w for w in topic.replace("—","").replace("-","").split() if len(w) > 3][:3]
+    topic_hint  = " ".join(topic_words)
+    base_kw     = category_keywords.get(category, "ancient civilization history ruins")
+    query       = urllib.parse.quote(f"{topic_hint} {base_kw}")
+    # Unsplash Source — returns a real relevant photo instantly, no API key needed
+    seed = abs(hash(topic)) % 1000   # consistent image per topic
+    return f"https://source.unsplash.com/800x400/?{query}&sig={seed}"
 
 
 def publish_to_blogger(blog_data: dict) -> str:

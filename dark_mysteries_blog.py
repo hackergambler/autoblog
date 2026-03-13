@@ -357,23 +357,26 @@ def get_blogger_service():
 
 
 def get_topic_image(topic: str, category: str) -> str:
-    """Generate a dark, topic-matched image using Pollinations AI — 100% free, no API key needed."""
+    """Get a reliable topic-matched image using Unsplash Source — instant, free, no API key."""
     import urllib.parse
-    style_keywords = {
-        "Ghost Stories & Hauntings":         "haunted dark gothic atmospheric cinematic",
-        "Dark Rituals & Occult":             "dark occult mystical ritual candles shadows",
-        "Unsolved Mysteries & Conspiracies": "dark mysterious thriller noir cinematic",
-        "Paranormal & Supernatural":         "paranormal supernatural dark eerie glowing",
-        "Cursed Objects & Places":           "cursed dark horror dramatic moody",
-        "Urban Legends & Folklore":          "dark folklore mythical creature night forest",
-        "True Crime & Dark History":         "dark crime history dramatic noir shadows",
+    # Map each category to the best Unsplash search keyword
+    category_keywords = {
+        "Ghost Stories & Hauntings":         "haunted abandoned dark gothic",
+        "Dark Rituals & Occult":             "candles dark mystical occult",
+        "Unsolved Mysteries & Conspiracies": "mystery dark fog night",
+        "Paranormal & Supernatural":         "dark eerie supernatural fog",
+        "Cursed Objects & Places":           "dark horror abandoned ruins",
+        "Urban Legends & Folklore":          "dark forest night creature",
+        "True Crime & Dark History":         "dark city night crime noir",
     }
-    style = style_keywords.get(category, "dark mysterious cinematic horror atmospheric")
-    # Build a specific prompt from the topic + category style
-    prompt = f"{topic}, {style}, dark background, high contrast, dramatic lighting, photorealistic, 4K"
-    encoded = urllib.parse.quote(prompt)
-    # Pollinations.ai — free image generation, no signup, no API key
-    return f"https://image.pollinations.ai/prompt/{encoded}?width=800&height=400&nologo=true"
+    # Extract first 3 meaningful words from topic for extra specificity
+    topic_words = [w for w in topic.replace("—","").replace("-","").split() if len(w) > 3][:3]
+    topic_hint  = " ".join(topic_words)
+    base_kw     = category_keywords.get(category, "dark mysterious horror")
+    query       = urllib.parse.quote(f"{topic_hint} {base_kw}")
+    # Unsplash Source — returns a real relevant photo instantly, no API key needed
+    seed = abs(hash(topic)) % 1000   # consistent image per topic
+    return f"https://source.unsplash.com/800x400/?{query}&sig={seed}"
 
 
 def publish_to_blogger(blog_data: dict) -> str:
