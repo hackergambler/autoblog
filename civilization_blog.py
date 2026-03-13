@@ -356,7 +356,8 @@ def publish_to_blogger(blog_data: dict) -> str:
     style   = get_category_style(blog_data["category"])
     seed    = random.randint(1, 9999)
     img_url = f"https://picsum.photos/seed/{seed}/800/400"
-    now_str = datetime.datetime.now().strftime("%B %d, %Y")
+    ist = datetime.timezone(datetime.timedelta(hours=5, minutes=30))
+    now_str = datetime.datetime.now(ist).strftime("%B %d, %Y")
 
     full_content = f"""
 <div style="font-family:'Segoe UI',Georgia,serif; max-width:860px; margin:0 auto; color:#1a1a1a; line-height:1.85;">
