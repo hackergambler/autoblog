@@ -32,7 +32,7 @@ from googleapiclient.discovery import build
 # ============================================================
 
 GROQ_API_KEY    = os.environ.get("GROQ_API_KEY",    "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")
-BLOGGER_BLOG_ID = os.environ.get("BLOGGER_BLOG_ID", "2282255122948388275")
+DARK_BLOGGER_BLOG_ID = os.environ.get("DARK_BLOGGER_BLOG_ID", "2282255122948388275")
 
 POST_EVERY_MINUTES = 30
 
