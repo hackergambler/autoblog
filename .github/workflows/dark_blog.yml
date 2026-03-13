@@ -22,7 +22,9 @@ jobs:
         run: pip install groq google-auth google-auth-oauthlib google-api-python-client schedule
 
       - name: Write token.json from secret
-        run: echo '${{ secrets.GOOGLE_TOKEN_JSON }}' > token.json
+        env:
+          TOKEN_JSON: ${{ secrets.GOOGLE_TOKEN_JSON }}
+        run: python3 -c "import os; open('token.json','w').write(os.environ['TOKEN_JSON'])"
 
       - name: Verify token.json
         run: python3 -c "import json; json.load(open('token.json')); print('✅ token.json is valid')"
