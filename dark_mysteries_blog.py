@@ -417,7 +417,10 @@ def get_topic_image(topic: str, category: str) -> str:
     pool = IMAGE_POOL.get(category, default_pool)
     # Use topic hash so same topic always gets same image
     idx = abs(hash(topic)) % len(pool)
-    return pool[idx]
+    raw_url = pool[idx]
+    # Wrap with wsrv.nl proxy — bypasses hotlink protection, works from any domain
+    import urllib.parse
+    return f"https://wsrv.nl/?url={urllib.parse.quote(raw_url, safe='')}&w=800&h=400&fit=cover&output=jpg"
 
 
 def publish_to_blogger(blog_data: dict) -> str:
