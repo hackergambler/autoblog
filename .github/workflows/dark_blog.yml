@@ -23,7 +23,7 @@ jobs:
 
       - name: Write token.json from secret
         env:
-          TOKEN_JSON: ${{ secrets.GOOGLE_TOKEN_JSON }}
+          TOKEN_JSON: ${{ secrets.GOOGLE_TOKEN }}
         run: python3 -c "import os; open('token.json','w').write(os.environ['TOKEN_JSON'])"
 
       - name: Verify token.json
