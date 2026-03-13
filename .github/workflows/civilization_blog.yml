@@ -40,4 +40,4 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           CIVILIZATION_BLOG_ID: ${{ secrets.CIVILIZATION_BLOG_ID }}
-        run: python civilization_blog_writer.py --once
+        run: python civilization_blog.py --once
