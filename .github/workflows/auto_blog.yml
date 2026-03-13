@@ -1,17 +1,24 @@
-name: Auto Blog Writer
+name: Daily Tips - Human Mode
 
 on:
   schedule:
-    - cron: '0 * * * *'   # Runs every hour automatically
-  workflow_dispatch:        # Also lets you run it manually anytime
+    # Runs at 2:00 AM and 2:00 PM UTC
+    - cron: '0 2,14 * * *'
+  workflow_dispatch:
 
 jobs:
   post-blog:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Random Human Delay
+        run: |
+          # Wait between 1 and 45 minutes randomly
+          DELAY=$((1 + RANDOM % 45))
+          echo "Waiting $DELAY minutes to look human..."
+          sleep $((DELAY * 60))
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -19,23 +26,12 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install groq google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client schedule
+        run: pip install groq google-auth google-auth-oauthlib google-api-python-client
 
-      - name: Write token.json from secret
+      - name: Rebuild token.json
         run: echo '${{ secrets.GOOGLE_TOKEN }}' > token.json
 
-      - name: Write credentials.json from secret
-        run: echo '${{ secrets.GOOGLE_CREDENTIALS }}' > credentials.json
-
-      - name: Write used_topics.json if exists
-        run: |
-          if [ -f used_topics.json ]; then
-            echo "used_topics.json already exists"
-          else
-            echo "[]" > used_topics.json
-          fi
-
-      - name: Run Auto Blog Writer
+      - name: Run Daily Tips Blog
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
