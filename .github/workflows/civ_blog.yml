@@ -1,0 +1,31 @@
+name: Civilization Blog — Auto Post
+
+on:
+  schedule:
+    - cron: '15,45 * * * *'  # Every 30 minutes, offset by 15 min from dark blog
+  workflow_dispatch:           # Manual trigger from GitHub UI
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install groq google-auth google-auth-oauthlib google-api-python-client schedule
+
+      - name: Write token.json from secret
+        run: echo '${{ secrets.GOOGLE_TOKEN_JSON }}' > token.json
+
+      - name: Run blog writer
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          BLOGGER_BLOG_ID: ${{ secrets.CIV_BLOGGER_BLOG_ID }}
+        run: python civilization_blog.py --once
