@@ -10,7 +10,7 @@ SETUP:
 1. Create new Blogger blog at https://www.blogger.com
 2. Get new Blog ID from the dashboard URL
 3. Reuse same credentials.json and token.json from main blog
-4. Fill in GROQ_API_KEY and BLOGGER_BLOG_ID below
+4. Fill in GROQ_API_KEY and CIV_BLOGGER_BLOG_ID below
 5. Run: python civilization_blog.py
 """
 
@@ -497,7 +497,7 @@ def publish_to_blogger(blog_data: dict) -> str:
         "content": full_content,
         "labels":  blog_data.get("tags", []) + [blog_data["category"]]
     }
-    result = service.posts().insert(blogId=BLOGGER_BLOG_ID, body=post).execute()
+    result = service.posts().insert(blogId=CIV_BLOGGER_BLOG_ID, body=post).execute()
     return result.get("url", "Published!")
 
 
@@ -583,7 +583,7 @@ if __name__ == "__main__":
 
     if "--once" in sys.argv:
         print("☁️   GitHub Actions mode — single post\n")
-        print(f"🔑  Using Blog ID: {BLOGGER_BLOG_ID}")
+        print(f"🔑  Using Blog ID: {CIV_BLOGGER_BLOG_ID}")
         write_and_publish()
     else:
         print(f"📅  Posting every {POST_EVERY_MINUTES} minutes (48 posts/day)")
