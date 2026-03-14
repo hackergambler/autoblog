@@ -2,7 +2,7 @@ name: Dark Mysteries - Human Mode
 
 on:
   schedule:
-    # Runs at 6:00 AM and 6:00 PM UTC (11:30 AM and 11:30 PM IST)
+    # Runs at 6:00 AM and 6:00 PM UTC (11:30 AM & 11:30 PM IST)
     - cron: '0 6,18 * * *'
   workflow_dispatch:
 
@@ -10,16 +10,17 @@ jobs:
   post-blog:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # REQUIRED: Allows the bot to save the history file
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Random Human Delay
         run: |
-          # Wait between 1 and 50 minutes randomly
           DELAY=$((1 + RANDOM % 50))
-          echo "Waiting $DELAY minutes to look human..."
+          echo "Waiting $DELAY minutes..."
           sleep $((DELAY * 60))
 
       - name: Set up Python
@@ -39,10 +40,11 @@ jobs:
           DARK_BLOGGER_BLOG_ID: ${{ secrets.DARK_BLOGGER_BLOG_ID }}
         run: python dark_mysteries_blog.py
 
-      - name: Commit and Push History
+      - name: Sync and Commit History
         run: |
           git config --global user.name "MYRQ-Bot"
           git config --global user.email "noreply@myrqai.com"
           git add dark_history.json
+          git pull --rebase origin main
           git commit -m "Update dark mysteries history [skip ci]" || echo "No changes to commit"
-          git push
+          git push origin main
