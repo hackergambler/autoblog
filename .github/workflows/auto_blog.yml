@@ -2,7 +2,7 @@ name: Daily Tips - Human Mode
 
 on:
   schedule:
-    # Runs at 2:00 AM and 2:00 PM UTC
+    # Runs at 2:00 AM and 2:00 PM UTC (7:30 AM & 7:30 PM IST)
     - cron: '0 2,14 * * *'
   workflow_dispatch:
 
@@ -10,15 +10,17 @@ jobs:
   post-blog:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Important: Allows the action to save history files
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches all history for a clean rebase
 
       - name: Random Human Delay
         run: |
           DELAY=$((1 + RANDOM % 45))
-          echo "Waiting $DELAY minutes to look human..."
+          echo "Waiting $DELAY minutes..."
           sleep $((DELAY * 60))
 
       - name: Set up Python
@@ -38,10 +40,11 @@ jobs:
           BLOGGER_BLOG_ID: ${{ secrets.BLOGGER_BLOG_ID }}
         run: python auto_blog_writer_FREE.py
 
-      - name: Commit and Push History Changes
+      - name: Sync and Commit History
         run: |
           git config --global user.name "MYRQ-Bot"
           git config --global user.email "noreply@myrqai.com"
           git add used_topics.json
-          git commit -m "Update used topics history [skip ci]" || echo "No changes to commit"
-          git push
+          git pull --rebase origin main
+          git commit -m "Update daily tips history [skip ci]" || echo "No changes to commit"
+          git push origin main
