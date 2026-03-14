@@ -1,10 +1,11 @@
-import os, sys, random, time, json, datetime
+import os, sys, random, json, datetime, time
 from groq import Groq
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 BLOGGER_BLOG_ID = os.environ.get("BLOGGER_BLOG_ID")
+HISTORY_FILE = "used_topics.json"
 
 TOPICS = {
     "Mindset": ["Neuroplasticity for Adults", "The Stoic Approach to Modern Stress", "Growth Mindset vs Fixed Mindset"],
@@ -13,69 +14,60 @@ TOPICS = {
     "Tech": ["Building Private Cloud Storage", "The Ethics of Artificial Intelligence", "Mastering the Linux Command Line"]
 }
 
+def load_history():
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE, "r") as f: return json.load(f)
+        except: return []
+    return []
+
+def save_history(topic):
+    history = load_history()
+    history.append(topic)
+    with open(HISTORY_FILE, "w") as f: json.dump(history, f)
+
 def get_service():
     with open('token.json', 'r') as f:
         info = json.load(f)
     return build('blogger', 'v3', credentials=Credentials.from_authorized_user_info(info))
 
 def get_styled_html(content, category, topic):
-    themes = {
-        "Tech": {"bg": "#0f172a", "accent": "#6366f1", "icon": "💻"},
-        "Health": {"bg": "#052e16", "accent": "#22c55e", "icon": "🌿"},
-        "Finance": {"bg": "#1c1917", "accent": "#f59e0b", "icon": "💰"},
-        "Mindset": {"bg": "#4a044e", "accent": "#e879f9", "icon": "🧠"}
-    }
-    theme = themes.get(category, {"bg": "#1e293b", "accent": "#3b82f6", "icon": "📝"})
-    hero_img = f"https://picsum.photos/seed/{topic.replace(' ', '')}/800/450"
-    
-    style = f"""
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
-        .blog-wrapper {{ font-family: 'Inter', sans-serif; line-height: 1.8; color: #334155; max-width: 800px; margin: auto; }}
-        .hero-banner {{ background: linear-gradient(135deg, {theme['bg']} 0%, {theme['accent']} 100%); color: white; padding: 60px 20px; border-radius: 12px; text-align: center; margin-bottom: 30px; }}
-        .category-badge {{ background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; }}
-        .key-takeaways {{ background: #f8fafc; border-left: 5px solid {theme['accent']}; padding: 25px; border-radius: 0 8px 8px 0; margin: 30px 0; }}
-        h2 {{ color: {theme['bg']}; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-top: 40px; }}
-        img {{ width: 100%; border-radius: 12px; margin: 20px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }}
-        .action-box {{ background: {theme['bg']}; color: white; padding: 30px; border-radius: 12px; margin-top: 40px; }}
-    </style>
-    """
-    
+    curr_date = datetime.datetime.now().strftime('%B %d, %Y')
     return f"""
-    {style}
-    <div class="blog-wrapper">
-        <div class="hero-banner">
-            <span class="category-badge">{theme['icon']} {category}</span>
-            <h1 style="font-size: 2.8rem; margin-top: 15px; line-height: 1.2;">{topic}</h1>
-            <p>⏱️ 6 min read • {datetime.datetime.now().strftime('%B %d, %Y')}</p>
+    <div style="font-family: 'Helvetica', sans-serif; max-width: 800px; margin: auto; color: #334; line-height: 1.8;">
+        <div style="background: #1e293b; color: white; padding: 50px 30px; border-radius: 15px; text-align: center; margin-bottom: 30px;">
+            <h1 style="margin: 0; font-size: 2.5rem;">{topic}</h1>
+            <p style="text-transform: uppercase; letter-spacing: 2px; opacity: 0.8;">{category} • {curr_date}</p>
         </div>
-        <img src="{hero_img}" alt="{topic}">
-        <div class="key-takeaways">
-            <h3 style="margin-top:0;">📌 Executive Summary</h3>
-            <p>This deep-dive explores the core principles of {topic}, providing actionable strategies to master {category.lower()} in the modern era.</p>
+        <div style="font-size: 1.1rem;">{content}</div>
+        <div style="border-top: 2px solid #f1f5f9; margin-top: 60px; padding: 30px; text-align: center; color: #1e293b;">
+            <p style="margin: 0; font-size: 1.2rem;"><b>Published by MYRQ</b></p>
+            <p style="margin: 5px 0; color: #64748b;">{curr_date} • Expert Insights & Daily Tips</p>
         </div>
-        <div class="main-content">{content}</div>
-        <div class="action-box">
-            <h3>🚀 Take Action Today</h3>
-            <p>Don't just read—apply. Which of these strategies will you implement first? Let us know in the comments!</p>
-        </div>
-    </div>
-    """
-
-def generate_content(topic, cat):
-    client = Groq(api_key=GROQ_API_KEY)
-    prompt = f"Act as an industry expert in {cat}. Write a 1200-word authoritative guide on '{topic}'. Use HTML (h2, h3, b, li). Focus on data, specific examples, and a professional tone. Avoid AI clichés."
-    response = client.chat.completions.create(messages=[{"role": "user", "content": prompt}], model="llama-3.3-70b-versatile", temperature=0.7)
-    return get_styled_html(response.choices[0].message.content, cat, topic)
+    </div>"""
 
 def run():
-    cat = random.choice(list(TOPICS.keys()))
-    topic = random.choice(TOPICS[cat])
-    content = generate_content(topic, cat)
+    history = load_history()
+    pool = [(c, t) for c, ts in TOPICS.items() for t in ts if t not in history]
+    
+    if not pool:
+        print("All topics used. Resetting history.")
+        with open(HISTORY_FILE, "w") as f: json.dump([], f)
+        return
+
+    cat, topic = random.choice(pool)
+    client = Groq(api_key=GROQ_API_KEY)
+    prompt = f"Write a 1200-word expert guide on '{topic}'. Use HTML tags (h2, h3, p). No AI intros."
+    res = client.chat.completions.create(messages=[{"role": "user", "content": prompt}], model="llama-3.3-70b-versatile")
+    
+    html_content = get_styled_html(res.choices[0].message.content, cat, topic)
+    
     service = get_service()
-    body = {'title': topic, 'content': content, 'labels': [cat, 'Expert Tips']}
+    body = {'title': topic, 'content': html_content, 'labels': [cat, 'Expert Tips']}
     service.posts().insert(blogId=BLOGGER_BLOG_ID, body=body, isDraft=False).execute()
-    print(f"✅ Daily Tips Published: {topic}")
+    
+    save_history(topic)
+    print(f"✅ Daily Tip Published: {topic}")
 
 if __name__ == "__main__":
     run()
