@@ -2,7 +2,6 @@ name: Dark Mysteries - Human Mode
 
 on:
   schedule:
-    # Runs at 6:00 AM and 6:00 PM UTC (11:30 AM & 11:30 PM IST)
     - cron: '0 6,18 * * *'
   workflow_dispatch:
 
@@ -20,7 +19,6 @@ jobs:
       - name: Random Human Delay
         run: |
           DELAY=$((1 + RANDOM % 50))
-          echo "Waiting $DELAY minutes..."
           sleep $((DELAY * 60))
 
       - name: Set up Python
@@ -43,8 +41,8 @@ jobs:
       - name: Sync and Commit History
         run: |
           git config --global user.name "MYRQ-Bot"
-          git config --global user.email "noreply@myrqai.com"
+          git config --global user.email "bot@myrqai.com"
           git add dark_history.json
-          git pull --rebase origin main
           git commit -m "Update dark mysteries history [skip ci]" || echo "No changes to commit"
+          git pull --rebase origin main
           git push origin main
