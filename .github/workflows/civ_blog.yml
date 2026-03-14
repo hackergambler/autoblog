@@ -2,13 +2,15 @@ name: Civilization - Human Mode
 
 on:
   schedule:
-    # Runs at 4:00 AM and 4:00 PM UTC
+    # Runs at 4:00 AM and 4:00 PM UTC (9:30 AM and 9:30 PM IST)
     - cron: '0 4,16 * * *'
   workflow_dispatch:
 
 jobs:
   post-blog:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # CRITICAL: Allows saving the history file back to GitHub
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -35,4 +37,12 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           CIV_BLOGGER_BLOG_ID: ${{ secrets.CIV_BLOGGER_BLOG_ID }}
-        run: python civilization_blog.py --once
+        run: python civilization_blog.py
+
+      - name: Save History to Repo
+        run: |
+          git config --global user.name "MYRQ-Bot"
+          git config --global user.email "noreply@myrqai.com"
+          git add civ_history.json
+          git commit -m "Update civilization history [skip ci]" || echo "No changes to commit"
+          git push
