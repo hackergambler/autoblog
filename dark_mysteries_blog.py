@@ -27,8 +27,9 @@ MAX_RETRIES = 3
 RETRY_DELAY_SECONDS = 3
 
 TOPIC_REPLENISH_THRESHOLD = 50
-TOPIC_BATCH_SIZE = 200
-MAX_TOPICS_PER_GENERATION = 500
+TOPIC_BATCH_SIZE = 40
+MAX_TOPICS_PER_GENERATION = 60
+TOPIC_GENERATION_ATTEMPTS = 5
 
 logging.basicConfig(
     level=logging.INFO,
@@ -170,78 +171,138 @@ def groq_client() -> Groq:
     return Groq(api_key=GROQ_API_KEY)
 
 
-def generate_new_topics(existing_topics: List[str], batch_size: int = TOPIC_BATCH_SIZE) -> List[str]:
-    batch_size = max(1, min(batch_size, MAX_TOPICS_PER_GENERATION))
-    existing_sample = existing_topics[-150:] if len(existing_topics) > 150 else existing_topics
+def extract_json_object(text: str) -> str:
+    text = text.strip()
 
-    prompt = f"""
-Generate {batch_size} unique dark mystery / unexplained / conspiracy / true crime blog topic titles.
+    if text.startswith("```"):
+        lines = text.splitlines()
+        if len(lines) >= 3:
+            text = "\n".join(lines[1:-1]).strip()
 
-Requirements:
-- Return ONLY valid JSON
-- Format must be:
-  {{
-    "topics": [
-      "topic 1",
-      "topic 2"
-    ]
-  }}
-- Each topic must be specific, compelling, and blog-worthy
-- Avoid duplicates or near-duplicates
-- Avoid repeating these existing topics:
-{json.dumps(existing_sample, ensure_ascii=False, indent=2)}
+    start = text.find("{")
+    end = text.rfind("}")
+    if start != -1 and end != -1 and end > start:
+        return text[start:end + 1]
 
-Mix across:
-- unsolved crimes
-- disappearances
-- paranormal cases
-- historical mysteries
-- UFO incidents
-- secret experiments
-- maritime mysteries
-- abandoned places
-- cryptids
-- strange deaths
-- occult incidents
-- conspiracy theories
-- lost expeditions
-- unexplained transmissions
-- cursed objects
-- cursed places
+    return text
 
-Keep each topic as a short title or title with angle.
-Do not include numbering.
-Do not include commentary.
-JSON only.
-"""
 
-    client = groq_client()
-
-    response = retry(
-        client.chat.completions.create,
-        messages=[{"role": "user", "content": prompt}],
-        model=MODEL_NAME,
-        temperature=1.0,
-    )
-
-    raw = response.choices[0].message.content.strip()
-    if not raw:
-        raise RuntimeError("Topic generation returned empty output.")
+def parse_topics_from_response(raw: str) -> List[str]:
+    raw = raw.strip()
+    candidate = extract_json_object(raw)
 
     try:
-        data = json.loads(raw)
-    except json.JSONDecodeError as e:
-        raise RuntimeError(f"Topic generation returned invalid JSON: {e}\nRaw output:\n{raw[:1000]}")
+        data = json.loads(candidate)
+        if isinstance(data, dict) and isinstance(data.get("topics"), list):
+            return dedupe_preserve_order([str(t) for t in data["topics"]])
+        if isinstance(data, list):
+            return dedupe_preserve_order([str(t) for t in data])
+    except json.JSONDecodeError:
+        pass
 
-    if not isinstance(data, dict) or "topics" not in data or not isinstance(data["topics"], list):
-        raise RuntimeError("Topic generation JSON missing 'topics' list.")
+    topics = []
+    for line in raw.splitlines():
+        line = line.strip().strip(",")
+        if not line:
+            continue
 
-    new_topics = dedupe_preserve_order([str(t) for t in data["topics"]])
+        if line[:2] in ("- ", "* "):
+            line = line[2:].strip()
 
-    if not new_topics:
-        raise RuntimeError("Topic generation produced no usable topics.")
+        if "." in line[:4]:
+            parts = line.split(".", 1)
+            if parts[0].isdigit():
+                line = parts[1].strip()
 
-    return new_topics
+        line = line.strip().strip('"').strip("'").strip()
+
+        if line in {"{", "}", "[", "]"}:
+            continue
+        if line.startswith('"topics"') or line.startswith("'topics'"):
+            continue
+        if len(line) < 8:
+            continue
+
+        topics.append(line)
+
+    return dedupe_preserve_order(topics)
+
+
+def generate_new_topics(existing_topics: List[str], batch_size: int = TOPIC_BATCH_SIZE) -> List[str]:
+    batch_size = max(5, min(batch_size, MAX_TOPICS_PER_GENERATION))
+    existing_sample = existing_topics[-100:] if len(existing_topics) > 100 else existing_topics
+
+    client = groq_client()
+    last_error = None
+
+    for attempt in range(1, TOPIC_GENERATION_ATTEMPTS + 1):
+        prompt = f"""
+Generate {batch_size} unique dark mystery / unexplained / conspiracy / true crime blog topic titles.
+
+Return ONLY JSON in exactly this format:
+{{
+  "topics": [
+    "topic 1",
+    "topic 2"
+  ]
+}}
+
+Rules:
+- exactly {batch_size} topics
+- no markdown
+- no code fences
+- no explanation
+- no numbering
+- no duplicates
+- each topic must be short and compelling
+- avoid these existing topics:
+{json.dumps(existing_sample, ensure_ascii=False)}
+
+Mix across:
+unsolved crimes, disappearances, paranormal cases, historical mysteries,
+UFO incidents, secret experiments, maritime mysteries, cryptids,
+strange deaths, occult incidents, conspiracy theories, lost expeditions,
+unexplained transmissions, cursed objects, cursed places.
+"""
+
+        try:
+            response = retry(
+                client.chat.completions.create,
+                messages=[{"role": "user", "content": prompt}],
+                model=MODEL_NAME,
+                temperature=1.0,
+            )
+
+            raw = response.choices[0].message.content.strip()
+            if not raw:
+                raise RuntimeError("Empty topic generation response.")
+
+            topics = parse_topics_from_response(raw)
+
+            existing_keys = {normalize_topic(t).casefold() for t in existing_topics}
+            fresh_topics = [
+                t for t in topics
+                if normalize_topic(t).casefold() not in existing_keys
+            ]
+
+            if len(fresh_topics) >= max(5, batch_size // 2):
+                return fresh_topics
+
+            raise RuntimeError(
+                f"Too few usable topics returned on attempt {attempt}: got {len(fresh_topics)}"
+            )
+
+        except Exception as e:
+            last_error = e
+            logging.warning(
+                "Topic generation attempt %s/%s failed: %s",
+                attempt,
+                TOPIC_GENERATION_ATTEMPTS,
+                e,
+            )
+            time.sleep(2)
+
+    raise RuntimeError(f"Topic generation failed after retries: {last_error}")
 
 
 def ensure_topic_inventory(state: Dict[str, Any], topics: List[str]) -> List[str]:
@@ -254,23 +315,39 @@ def ensure_topic_inventory(state: Dict[str, Any], topics: List[str]) -> List[str
         return topics
 
     logging.info(
-        "Unused topics below threshold (%s). Generating %s new topics.",
-        TOPIC_REPLENISH_THRESHOLD,
-        TOPIC_BATCH_SIZE,
+        "Unused topics below threshold (%s). Generating more topics in small batches.",
+        TOPIC_REPLENISH_THRESHOLD
     )
 
-    new_topics = generate_new_topics(topics, TOPIC_BATCH_SIZE)
-    merged = dedupe_preserve_order(topics + new_topics)
-    added_count = len(merged) - len(topics)
+    merged = topics[:]
+    target_unused = TOPIC_REPLENISH_THRESHOLD + TOPIC_BATCH_SIZE
 
-    if added_count == 0:
-        raise RuntimeError("Generated topics were all duplicates; no new topics were added.")
+    for _ in range(5):
+        used_now = {normalize_topic(t).casefold() for t in state.get("used_topics", [])}
+        unused_now = [t for t in merged if normalize_topic(t).casefold() not in used_now]
+
+        if len(unused_now) >= target_unused:
+            break
+
+        new_topics = generate_new_topics(merged, TOPIC_BATCH_SIZE)
+        before = len(merged)
+        merged = dedupe_preserve_order(merged + new_topics)
+        added_count = len(merged) - before
+
+        logging.info("Generated batch added %s new topics", added_count)
+
+        if added_count == 0:
+            logging.warning("No new topics added in this batch.")
+            break
+
+    if len(merged) == len(topics):
+        raise RuntimeError("Could not replenish topics; no new unique topics were added.")
 
     save_topics(merged)
     state["topic_refills"] = int(state.get("topic_refills", 0)) + 1
     save_state(state)
 
-    logging.info("Added %s new topics. New total=%s", added_count, len(merged))
+    logging.info("Topic inventory updated: total=%s", len(merged))
     return merged
 
 
@@ -301,6 +378,8 @@ def choose_topic(state: Dict[str, Any], topics: List[str]) -> str:
 
 
 def mark_topic_used(state: Dict[str, Any], topic: str) -> None:
+    topic = normalize_topic(topic)
+
     if topic not in state["used_topics"]:
         state["used_topics"].append(topic)
 
@@ -397,7 +476,11 @@ def main():
 
         state = load_state()
         topics = load_topics()
-        topics = ensure_topic_inventory(state, topics)
+
+        try:
+            topics = ensure_topic_inventory(state, topics)
+        except Exception as e:
+            logging.warning("Topic refill failed, continuing with existing topics: %s", e)
 
         topic = choose_topic(state, topics)
         logging.info("Selected topic: %s", topic)
