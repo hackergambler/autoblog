@@ -5,6 +5,7 @@ import time
 import random
 import logging
 import datetime
+import re
 from pathlib import Path
 from typing import Dict, List, Any, Set
 
@@ -417,6 +418,35 @@ def get_service():
         raise RuntimeError(f"Failed to load Blogger credentials from token.json: {e}")
 
 
+def clean_generated_html(content: str, topic: str) -> str:
+    if not content:
+        return content
+
+    cleaned = content.strip()
+
+    cleaned = re.sub(r"^```html\s*", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"^```\s*", "", cleaned)
+    cleaned = re.sub(r"\s*```$", "", cleaned)
+
+    topic_pattern = re.escape(topic.strip())
+
+    cleaned = re.sub(
+        rf"^\s*<h1[^>]*>\s*{topic_pattern}\s*</h1>\s*",
+        "",
+        cleaned,
+        flags=re.IGNORECASE | re.DOTALL
+    )
+
+    cleaned = re.sub(
+        rf"^\s*<h2[^>]*>\s*{topic_pattern}\s*</h2>\s*",
+        "",
+        cleaned,
+        flags=re.IGNORECASE | re.DOTALL
+    )
+
+    return cleaned.strip()
+
+
 def generate_article(topic: str) -> str:
     client = groq_client()
 
@@ -427,6 +457,8 @@ Write a 1200-1500 word article about "{topic}".
 
 Requirements:
 - return valid HTML only
+- do NOT include the article title as <h1> or <h2>
+- start directly with an introduction paragraph or a section heading
 - use <h2>, <h3>, <p>, <ul>, <li> where useful
 - tone: academic yet captivating
 - no markdown
@@ -447,19 +479,21 @@ Requirements:
     if not content:
         raise RuntimeError("Groq returned empty article content.")
 
-    return content
+    return clean_generated_html(content, topic)
 
 
 def get_styled_html(content: str, topic: str) -> str:
     curr_date = datetime.datetime.now().strftime("%B %d, %Y")
     return f"""
-<div style="font-family: Georgia, serif; max-width: 800px; margin: auto; background: #fffcf9; padding: 45px; border: 1px solid #dcd1bd; color: #2d241e;">
-    <div style="text-align: center; border-bottom: 2px solid #8d6e63; padding-bottom: 20px; margin-bottom: 40px;">
-        <p style="letter-spacing: 5px; color: #8d6e63; font-weight: bold;">THE ANCIENT ARCHIVES</p>
-        <h1 style="font-size: 3rem; margin: 10px 0; color: #3e2723;">{topic}</h1>
+<div style="font-family: Georgia, serif; max-width: 800px; margin: auto; background: #fffcf9; padding: 45px; border: 1px solid #dcd1bd; color: #2d241e; box-sizing: border-box;">
+    <div style="text-align: center; border-bottom: 2px solid #8d6e63; padding-bottom: 18px; margin-bottom: 32px;">
+        <p style="letter-spacing: 5px; color: #8d6e63; font-weight: bold; margin: 0 0 12px 0;">THE ANCIENT ARCHIVES</p>
+        <div style="font-size: 2.4rem; line-height: 1.2; font-weight: 700; color: #3e2723; margin: 0; word-break: break-word;">
+            {topic}
+        </div>
     </div>
 
-    <div style="line-height: 2; font-size: 1.2rem;">
+    <div style="line-height: 1.9; font-size: 1.15rem; overflow-wrap: break-word;">
         {content}
     </div>
 
