@@ -70,6 +70,12 @@ jobs:
           print("token.json created successfully")
           PY
 
+      - name: Random human-like delay
+        run: |
+          DELAY=$((900 + RANDOM % 6300))
+          echo "Sleeping for $DELAY seconds before posting..."
+          sleep "$DELAY"
+
       - name: Run dark blog script
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
