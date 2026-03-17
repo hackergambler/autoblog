@@ -2,7 +2,7 @@ name: Civilization Blog
 
 on:
   schedule:
-    - cron: "0 8 * * *"
+    - cron: "0 8,20 * * *"
   workflow_dispatch:
 
 permissions:
@@ -66,6 +66,12 @@ jobs:
           )
           print("token.json created successfully")
           PY
+
+      - name: Random human-like delay
+        run: |
+          DELAY=$((900 + RANDOM % 6300))
+          echo "Sleeping for $DELAY seconds before posting..."
+          sleep "$DELAY"
 
       - name: Run civilization blog script
         env:
