@@ -13,27 +13,21 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-# ==========================================
-# Config
-# ==========================================
+BASE_DIR = Path(__file__).resolve().parent
+
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 DARK_BLOGGER_BLOG_ID = os.getenv("DARK_BLOGGER_BLOG_ID")
 
-STATE_FILE = Path("dark_state.json")
-TOPICS_FILE = Path("dark_topics_2000.json")
-TOKEN_FILE = Path("token.json")
+STATE_FILE = BASE_DIR / "dark_state.json"
+TOPICS_FILE = BASE_DIR / "dark_topics_2000.json"
+TOKEN_FILE = BASE_DIR / "token.json"
 
 MODEL_NAME = "llama-3.3-70b-versatile"
 MAX_RETRIES = 3
 RETRY_DELAY_SECONDS = 3
 
-# Generate more topics when remaining unused topics fall below this number
 TOPIC_REPLENISH_THRESHOLD = 50
-
-# How many new topics to ask for each refill
 TOPIC_BATCH_SIZE = 200
-
-# Safety cap to avoid giant runaway file growth in one call
 MAX_TOPICS_PER_GENERATION = 500
 
 logging.basicConfig(
@@ -41,9 +35,7 @@ logging.basicConfig(
     format="%(asctime)s | %(levelname)s | %(message)s"
 )
 
-# ==========================================
-# State
-# ==========================================
+
 def default_state() -> Dict[str, Any]:
     return {
         "used_topics": [],
@@ -86,9 +78,6 @@ def save_state(state: Dict[str, Any]) -> None:
     temp_file.replace(STATE_FILE)
 
 
-# ==========================================
-# Topics storage
-# ==========================================
 def normalize_topic(topic: str) -> str:
     return " ".join(str(topic).strip().split())
 
@@ -146,9 +135,6 @@ def save_topics(topics: List[str]) -> None:
     temp_file.replace(TOPICS_FILE)
 
 
-# ==========================================
-# Validation
-# ==========================================
 def validate_config() -> None:
     missing = []
 
@@ -165,9 +151,6 @@ def validate_config() -> None:
         raise RuntimeError(f"Missing required configuration: {', '.join(missing)}")
 
 
-# ==========================================
-# Retry helper
-# ==========================================
 def retry(func, *args, **kwargs):
     last_error = None
 
@@ -183,20 +166,12 @@ def retry(func, *args, **kwargs):
     raise last_error
 
 
-# ==========================================
-# Topic generation
-# ==========================================
 def groq_client() -> Groq:
     return Groq(api_key=GROQ_API_KEY)
 
 
 def generate_new_topics(existing_topics: List[str], batch_size: int = TOPIC_BATCH_SIZE) -> List[str]:
-    """
-    Ask Groq for brand-new dark mystery topics.
-    Returns a list of plain topic strings.
-    """
     batch_size = max(1, min(batch_size, MAX_TOPICS_PER_GENERATION))
-
     existing_sample = existing_topics[-150:] if len(existing_topics) > 150 else existing_topics
 
     prompt = f"""
@@ -231,7 +206,8 @@ Mix across:
 - conspiracy theories
 - lost expeditions
 - unexplained transmissions
-- cursed objects / cursed places
+- cursed objects
+- cursed places
 
 Keep each topic as a short title or title with angle.
 Do not include numbering.
@@ -269,9 +245,6 @@ JSON only.
 
 
 def ensure_topic_inventory(state: Dict[str, Any], topics: List[str]) -> List[str]:
-    """
-    Refill topic store if the number of unused topics is too low.
-    """
     used = {normalize_topic(t).casefold() for t in state.get("used_topics", [])}
     unused = [t for t in topics if normalize_topic(t).casefold() not in used]
 
@@ -280,11 +253,13 @@ def ensure_topic_inventory(state: Dict[str, Any], topics: List[str]) -> List[str
     if len(unused) >= TOPIC_REPLENISH_THRESHOLD:
         return topics
 
-    logging.info("Unused topics below threshold (%s). Generating %s new topics.",
-                 TOPIC_REPLENISH_THRESHOLD, TOPIC_BATCH_SIZE)
+    logging.info(
+        "Unused topics below threshold (%s). Generating %s new topics.",
+        TOPIC_REPLENISH_THRESHOLD,
+        TOPIC_BATCH_SIZE,
+    )
 
     new_topics = generate_new_topics(topics, TOPIC_BATCH_SIZE)
-
     merged = dedupe_preserve_order(topics + new_topics)
     added_count = len(merged) - len(topics)
 
@@ -299,23 +274,18 @@ def ensure_topic_inventory(state: Dict[str, Any], topics: List[str]) -> List[str
     return merged
 
 
-# ==========================================
-# Topic selection
-# ==========================================
 def choose_topic(state: Dict[str, Any], topics: List[str]) -> str:
     used_topics = {normalize_topic(t).casefold() for t in state.get("used_topics", [])}
     last_topic = normalize_topic(state.get("last_topic")) if state.get("last_topic") else None
 
     available = [t for t in topics if normalize_topic(t).casefold() not in used_topics]
 
-    # If somehow still exhausted, force a refill
     if not available:
         logging.info("No available topics left. Forcing refill.")
         topics = ensure_topic_inventory(state, topics)
         used_topics = {normalize_topic(t).casefold() for t in state.get("used_topics", [])}
         available = [t for t in topics if normalize_topic(t).casefold() not in used_topics]
 
-    # As final protection, allow reset only if generation somehow failed repeatedly
     if not available:
         logging.warning("Still no topics after refill. Resetting used_topics as fallback.")
         state["used_topics"] = []
@@ -339,9 +309,6 @@ def mark_topic_used(state: Dict[str, Any], topic: str) -> None:
     state["last_run_at"] = datetime.datetime.utcnow().isoformat() + "Z"
 
 
-# ==========================================
-# Blogger
-# ==========================================
 def get_service():
     with TOKEN_FILE.open("r", encoding="utf-8") as f:
         info = json.load(f)
@@ -350,9 +317,6 @@ def get_service():
     return build("blogger", "v3", credentials=creds)
 
 
-# ==========================================
-# Article generation
-# ==========================================
 def generate_article(topic: str) -> str:
     client = groq_client()
 
@@ -427,17 +391,12 @@ def publish_post(service, topic: str, html: str):
     )
 
 
-# ==========================================
-# Main
-# ==========================================
 def main():
     try:
         validate_config()
 
         state = load_state()
         topics = load_topics()
-
-        # Refill before selecting if inventory is low
         topics = ensure_topic_inventory(state, topics)
 
         topic = choose_topic(state, topics)
