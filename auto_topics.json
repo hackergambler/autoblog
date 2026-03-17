@@ -1,16 +1,302 @@
 {
   "topics": [
-    { "category": "Mindset", "topic": "Neuroplasticity for Adults" },
-    { "category": "Mindset", "topic": "The Stoic Approach to Modern Stress" },
-    { "category": "Mindset", "topic": "Growth Mindset vs Fixed Mindset" },
-    { "category": "Finance", "topic": "Dividend Growth Investing" },
-    { "category": "Finance", "topic": "The 50/30/20 Budgeting Rule" },
-    { "category": "Finance", "topic": "How to Negotiate Your Salary" },
-    { "category": "Health", "topic": "Intermittent Fasting Protocols" },
-    { "category": "Health", "topic": "The Importance of Zone 2 Cardio" },
-    { "category": "Health", "topic": "High-Protein Meal Prep" },
-    { "category": "Tech", "topic": "Building Private Cloud Storage" },
-    { "category": "Tech", "topic": "The Ethics of Artificial Intelligence" },
-    { "category": "Tech", "topic": "Mastering the Linux Command Line" }
-  ]
+    {
+      "category": "Mindset",
+      "topic": "Neuroplasticity for Adults"
+    },
+    {
+      "category": "Mindset",
+      "topic": "The Stoic Approach to Modern Stress"
+    },
+    {
+      "category": "Mindset",
+      "topic": "Growth Mindset vs Fixed Mindset"
+    },
+    {
+      "category": "Finance",
+      "topic": "Dividend Growth Investing"
+    },
+    {
+      "category": "Finance",
+      "topic": "The 50/30/20 Budgeting Rule"
+    },
+    {
+      "category": "Finance",
+      "topic": "How to Negotiate Your Salary"
+    },
+    {
+      "category": "Health",
+      "topic": "Intermittent Fasting Protocols"
+    },
+    {
+      "category": "Health",
+      "topic": "The Importance of Zone 2 Cardio"
+    },
+    {
+      "category": "Health",
+      "topic": "High-Protein Meal Prep"
+    },
+    {
+      "category": "Tech",
+      "topic": "Building Private Cloud Storage"
+    },
+    {
+      "category": "Tech",
+      "topic": "The Ethics of Artificial Intelligence"
+    },
+    {
+      "category": "Tech",
+      "topic": "Mastering the Linux Command Line"
+    },
+    {
+      "category": "Mindset",
+      "topic": "How to Build Emotional Resilience"
+    },
+    {
+      "category": "Finance",
+      "topic": "How to Automate Monthly Savings"
+    },
+    {
+      "category": "Health",
+      "topic": "The Benefits of Morning Stretching Routines"
+    },
+    {
+      "category": "Tech",
+      "topic": "Essential Cybersecurity Measures for Remote Workers"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Using the Pomodoro Technique for Focus"
+    },
+    {
+      "category": "Career",
+      "topic": "Crafting a Professional Online Presence"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Consistent Morning Routine"
+    },
+    {
+      "category": "Learning",
+      "topic": "How to Set Effective Learning Goals"
+    },
+    {
+      "category": "Mindset",
+      "topic": "Overcoming Self-Doubt and Imposter Syndrome"
+    },
+    {
+      "category": "Finance",
+      "topic": "Understanding Credit Scores and Reports"
+    },
+    {
+      "category": "Health",
+      "topic": "Healthy Meal Planning on a Budget"
+    },
+    {
+      "category": "Tech",
+      "topic": "Introduction to Data Privacy and Protection"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Prioritizing Tasks with the Eisenhower Matrix"
+    },
+    {
+      "category": "Career",
+      "topic": "Building a Professional Network"
+    },
+    {
+      "category": "Habits",
+      "topic": "Breaking Bad Habits and Forming New Ones"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Benefits of Learning a New Language"
+    },
+    {
+      "category": "Mindset",
+      "topic": "Practicing Mindfulness and Meditation"
+    },
+    {
+      "category": "Finance",
+      "topic": "Investing in a Retirement Fund"
+    },
+    {
+      "category": "Health",
+      "topic": "Managing Chronic Stress and Anxiety"
+    },
+    {
+      "category": "Tech",
+      "topic": "Staying Safe from Online Phishing Scams"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Time Blocking for Efficient Scheduling"
+    },
+    {
+      "category": "Career",
+      "topic": "Switching to a New Industry or Field"
+    },
+    {
+      "category": "Habits",
+      "topic": "Developing a Reading Habit for Self-Improvement"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Importance of Continuous Education"
+    },
+    {
+      "category": "Mindset",
+      "topic": "Building Confidence and Self-Esteem"
+    },
+    {
+      "category": "Finance",
+      "topic": "Understanding and Managing Debt"
+    },
+    {
+      "category": "Health",
+      "topic": "The Benefits of Regular Exercise for Mental Health"
+    },
+    {
+      "category": "Tech",
+      "topic": "Using Productivity Apps for Organization"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Avoiding Burnout and Maintaining Work-Life Balance"
+    },
+    {
+      "category": "Career",
+      "topic": "Asking for Feedback and Constructive Criticism"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Bedtime Routine for Better Sleep"
+    },
+    {
+      "category": "Mindset",
+      "topic": "The Power of Gratitude for Mental Wellbeing"
+    },
+    {
+      "category": "Finance",
+      "topic": "Understanding and Utilizing Tax-Advantaged Accounts"
+    },
+    {
+      "category": "Health",
+      "topic": "The Importance of Hydration for Overall Health"
+    },
+    {
+      "category": "Tech",
+      "topic": "Setting Up a Secure Home Network"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Using the Getting Things Done Method for Task Management"
+    },
+    {
+      "category": "Career",
+      "topic": "Creating a Personal Brand for Career Advancement"
+    },
+    {
+      "category": "Habits",
+      "topic": "Forming Healthy Eating Habits for Long-Term Health"
+    },
+    {
+      "category": "Learning",
+      "topic": "Leveraging Online Courses for Professional Development"
+    },
+    {
+      "category": "Mindset",
+      "topic": "Developing a Growth Mindset in Adulthood"
+    },
+    {
+      "category": "Finance",
+      "topic": "Investing in Real Estate Investment Trusts"
+    },
+    {
+      "category": "Health",
+      "topic": "The Benefits of Regular Massage Therapy"
+    },
+    {
+      "category": "Tech",
+      "topic": "Introduction to Web Development for Beginners"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Managing Digital Distractions for Improved Focus"
+    },
+    {
+      "category": "Career",
+      "topic": "Effective Communication Strategies for the Workplace"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Habit of Journaling for Self-Reflection"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Importance of Active Learning Techniques"
+    },
+    {
+      "category": "Mindset",
+      "topic": "Cultivating Self-Compassion and Self-Forgiveness"
+    },
+    {
+      "category": "Finance",
+      "topic": "Understanding and Managing Cryptocurrency Investments"
+    },
+    {
+      "category": "Health",
+      "topic": "The Role of Probiotics in Gut Health"
+    },
+    {
+      "category": "Tech",
+      "topic": "Exploring the World of Augmented Reality"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Using the 80/20 Rule for Priority Management"
+    },
+    {
+      "category": "Career",
+      "topic": "Developing Leadership Skills for Career Advancement"
+    },
+    {
+      "category": "Habits",
+      "topic": "Building Resilience Through Physical Activity"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Benefits of Mentorship for Personal Growth"
+    },
+    {
+      "category": "Mindset",
+      "topic": "Embracing Failure as a Learning Opportunity"
+    },
+    {
+      "category": "Finance",
+      "topic": "Creating a Budget for Irregular Income"
+    },
+    {
+      "category": "Health",
+      "topic": "The Importance of Regular Health Check-Ups"
+    },
+    {
+      "category": "Tech",
+      "topic": "Introduction to Virtual Assistants for Productivity"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Using Music to Boost Focus and Productivity"
+    },
+    {
+      "category": "Career",
+      "topic": "Navigating Office Politics for Career Success"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Daily Routine for Improved Time Management"
+    }
+  ],
+  "updated_at": "2026-03-17T07:12:13.199114Z",
+  "count": 74
 }

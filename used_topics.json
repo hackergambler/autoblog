@@ -1,8 +1,10 @@
 {
-  "used_topics": [],
-  "last_topic": null,
-  "last_category": null,
-  "published_count": 0,
-  "last_run_at": null,
-  "topic_refills": 0
+  "used_topics": [
+    "health|||the benefits of regular exercise for mental health"
+  ],
+  "last_topic": "The Benefits of Regular Exercise for Mental Health",
+  "last_category": "Health",
+  "published_count": 1,
+  "last_run_at": "2026-03-17T07:12:16.972973Z",
+  "topic_refills": 1
 }
