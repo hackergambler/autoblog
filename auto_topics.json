@@ -1,0 +1,16 @@
+{
+  "topics": [
+    { "category": "Mindset", "topic": "Neuroplasticity for Adults" },
+    { "category": "Mindset", "topic": "The Stoic Approach to Modern Stress" },
+    { "category": "Mindset", "topic": "Growth Mindset vs Fixed Mindset" },
+    { "category": "Finance", "topic": "Dividend Growth Investing" },
+    { "category": "Finance", "topic": "The 50/30/20 Budgeting Rule" },
+    { "category": "Finance", "topic": "How to Negotiate Your Salary" },
+    { "category": "Health", "topic": "Intermittent Fasting Protocols" },
+    { "category": "Health", "topic": "The Importance of Zone 2 Cardio" },
+    { "category": "Health", "topic": "High-Protein Meal Prep" },
+    { "category": "Tech", "topic": "Building Private Cloud Storage" },
+    { "category": "Tech", "topic": "The Ethics of Artificial Intelligence" },
+    { "category": "Tech", "topic": "Mastering the Linux Command Line" }
+  ]
+}
