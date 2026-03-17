@@ -41,7 +41,7 @@ DEFAULT_TOPICS = [
     "The Bronze Age Collapse",
     "Daily Life in the Indus Valley Civilization",
     "The Mongol Empire's Military System",
-    "The Political World of the Italian Renaissance"
+    "The Political World of the Italian Renaissance",
 ]
 
 logging.basicConfig(
@@ -89,7 +89,7 @@ def default_state() -> Dict[str, Any]:
         "last_topic": None,
         "published_count": 0,
         "last_run_at": None,
-        "topic_refills": 0
+        "topic_refills": 0,
     }
 
 
@@ -128,7 +128,6 @@ def save_state(state: Dict[str, Any]) -> None:
 def create_default_topics_file() -> None:
     if TOPICS_FILE.exists():
         return
-
     save_topics(DEFAULT_TOPICS)
 
 
@@ -159,7 +158,7 @@ def save_topics(topics: List[str]) -> None:
     payload = {
         "topics": topics,
         "updated_at": datetime.datetime.utcnow().isoformat() + "Z",
-        "count": len(topics)
+        "count": len(topics),
     }
 
     temp_file = TOPICS_FILE.with_suffix(".tmp")
@@ -285,7 +284,7 @@ collapse of civilizations, famous historical turning points.
                 client.chat.completions.create,
                 messages=[{"role": "user", "content": prompt}],
                 model=MODEL_NAME,
-                temperature=1.0
+                temperature=1.0,
             )
 
             raw = response.choices[0].message.content.strip()
@@ -313,7 +312,7 @@ collapse of civilizations, famous historical turning points.
                 "Topic generation attempt %s/%s failed: %s",
                 attempt,
                 TOPIC_GENERATION_ATTEMPTS,
-                e
+                e,
             )
             time.sleep(2)
 
@@ -331,7 +330,7 @@ def ensure_topic_inventory(state: Dict[str, Any], topics: List[str]) -> List[str
 
     logging.info(
         "Unused topics below threshold (%s). Generating more topics in small batches.",
-        TOPIC_REPLENISH_THRESHOLD
+        TOPIC_REPLENISH_THRESHOLD,
     )
 
     merged = topics[:]
@@ -389,7 +388,8 @@ def choose_topic(state: Dict[str, Any], topics: List[str]) -> str:
 def mark_topic_used(state: Dict[str, Any], topic: str) -> None:
     topic = normalize_topic(topic)
 
-    if topic not in {normalize_topic(t) for t in state["used_topics"]}:
+    existing = {normalize_topic(t).casefold() for t in state["used_topics"]}
+    if topic.casefold() not in existing:
         state["used_topics"].append(topic)
 
     state["last_topic"] = topic
@@ -440,7 +440,7 @@ Requirements:
         client.chat.completions.create,
         messages=[{"role": "user", "content": prompt}],
         model=MODEL_NAME,
-        temperature=0.8
+        temperature=0.8,
     )
 
     content = response.choices[0].message.content.strip()
@@ -451,7 +451,7 @@ Requirements:
 
 
 def get_styled_html(content: str, topic: str) -> str:
-    curr_date = datetime.datetime.now().strftime("%B %d, %Y')
+    curr_date = datetime.datetime.now().strftime("%B %d, %Y")
     return f"""
 <div style="font-family: Georgia, serif; max-width: 800px; margin: auto; background: #fffcf9; padding: 45px; border: 1px solid #dcd1bd; color: #2d241e;">
     <div style="text-align: center; border-bottom: 2px solid #8d6e63; padding-bottom: 20px; margin-bottom: 40px;">
@@ -474,14 +474,14 @@ def publish_post(service, topic: str, html: str):
     body = {
         "title": topic,
         "content": html,
-        "labels": ["History", "Civilization"]
+        "labels": ["History", "Civilization"],
     }
 
     return retry(
         service.posts().insert(
             blogId=CIV_BLOGGER_BLOG_ID,
             body=body,
-            isDraft=False
+            isDraft=False,
         ).execute
     )
 
