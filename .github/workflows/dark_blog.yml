@@ -94,5 +94,6 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Update dark topics/state [skip ci]"
-            git push
+            git pull --rebase origin main
+            git push origin main
           fi
