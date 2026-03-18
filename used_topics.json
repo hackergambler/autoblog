@@ -1,11 +1,12 @@
 {
   "used_topics": [
     "health|||the benefits of regular exercise for mental health",
-    "mindset|||the power of gratitude for mental wellbeing"
+    "mindset|||the power of gratitude for mental wellbeing",
+    "finance|||understanding credit scores and reports"
   ],
-  "last_topic": "The Power of Gratitude for Mental Wellbeing",
-  "last_category": "Mindset",
-  "published_count": 2,
-  "last_run_at": "2026-03-18T07:36:40.413785Z",
+  "last_topic": "Understanding Credit Scores and Reports",
+  "last_category": "Finance",
+  "published_count": 3,
+  "last_run_at": "2026-03-18T09:31:32.405381Z",
   "topic_refills": 1
 }
