@@ -2,11 +2,12 @@
   "used_topics": [
     "health|||the benefits of regular exercise for mental health",
     "mindset|||the power of gratitude for mental wellbeing",
-    "finance|||understanding credit scores and reports"
+    "finance|||understanding credit scores and reports",
+    "career|||switching to a new industry or field"
   ],
-  "last_topic": "Understanding Credit Scores and Reports",
-  "last_category": "Finance",
-  "published_count": 3,
-  "last_run_at": "2026-03-18T09:31:32.405381Z",
+  "last_topic": "Switching to a New Industry or Field",
+  "last_category": "Career",
+  "published_count": 4,
+  "last_run_at": "2026-03-18T21:04:55.354368Z",
   "topic_refills": 1
 }
