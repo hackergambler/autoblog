@@ -3,11 +3,12 @@
     "health|||the benefits of regular exercise for mental health",
     "mindset|||the power of gratitude for mental wellbeing",
     "finance|||understanding credit scores and reports",
-    "career|||switching to a new industry or field"
+    "career|||switching to a new industry or field",
+    "tech|||introduction to virtual assistants for productivity"
   ],
-  "last_topic": "Switching to a New Industry or Field",
-  "last_category": "Career",
-  "published_count": 4,
-  "last_run_at": "2026-03-18T21:04:55.354368Z",
+  "last_topic": "Introduction to Virtual Assistants for Productivity",
+  "last_category": "Tech",
+  "published_count": 5,
+  "last_run_at": "2026-03-19T08:30:35.126894Z",
   "topic_refills": 1
 }
