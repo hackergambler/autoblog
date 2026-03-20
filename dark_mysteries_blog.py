@@ -5,11 +5,14 @@ import time
 import random
 import logging
 import datetime
+import re
 from pathlib import Path
 from typing import Dict, List, Any, Set
 
 from groq import Groq
 from google.oauth2.credentials import Credentials
+from google.auth.transport.requests import Request
+from google.auth.exceptions import RefreshError
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
@@ -18,9 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 DARK_BLOGGER_BLOG_ID = os.getenv("DARK_BLOGGER_BLOG_ID")
 
+GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
+GOOGLE_REFRESH_TOKEN = os.getenv("GOOGLE_REFRESH_TOKEN")
+GOOGLE_TOKEN_URI = os.getenv("GOOGLE_TOKEN_URI", "https://oauth2.googleapis.com/token")
+
 STATE_FILE = BASE_DIR / "dark_state.json"
 TOPICS_FILE = BASE_DIR / "dark_topics_2000.json"
-TOKEN_FILE = BASE_DIR / "token.json"
+TOKEN_FILE = BASE_DIR / "token.json"  # local fallback only
 
 MODEL_NAME = "llama-3.3-70b-versatile"
 MAX_RETRIES = 3
@@ -30,6 +38,8 @@ TOPIC_REPLENISH_THRESHOLD = 50
 TOPIC_BATCH_SIZE = 40
 MAX_TOPICS_PER_GENERATION = 60
 TOPIC_GENERATION_ATTEMPTS = 5
+
+BLOGGER_SCOPE = "https://www.googleapis.com/auth/blogger"
 
 logging.basicConfig(
     level=logging.INFO,
@@ -136,6 +146,14 @@ def save_topics(topics: List[str]) -> None:
     temp_file.replace(TOPICS_FILE)
 
 
+def has_env_google_auth() -> bool:
+    return all([
+        GOOGLE_CLIENT_ID,
+        GOOGLE_CLIENT_SECRET,
+        GOOGLE_REFRESH_TOKEN,
+    ])
+
+
 def validate_config() -> None:
     missing = []
 
@@ -143,13 +161,41 @@ def validate_config() -> None:
         missing.append("GROQ_API_KEY")
     if not DARK_BLOGGER_BLOG_ID:
         missing.append("DARK_BLOGGER_BLOG_ID")
-    if not TOKEN_FILE.exists():
-        missing.append("token.json")
+    if not has_env_google_auth() and not TOKEN_FILE.exists():
+        missing.append(
+            "Google auth: set GOOGLE_CLIENT_ID + GOOGLE_CLIENT_SECRET + GOOGLE_REFRESH_TOKEN "
+            "or provide token.json"
+        )
     if not TOPICS_FILE.exists():
         missing.append(str(TOPICS_FILE))
 
     if missing:
         raise RuntimeError(f"Missing required configuration: {', '.join(missing)}")
+
+
+def is_retryable_error(error: Exception) -> bool:
+    if isinstance(error, RefreshError):
+        return False
+
+    if isinstance(error, HttpError):
+        status = getattr(error.resp, "status", None)
+        return status in {429, 500, 502, 503, 504}
+
+    msg = str(error).lower()
+    transient_markers = [
+        "timeout",
+        "timed out",
+        "temporarily unavailable",
+        "connection reset",
+        "connection aborted",
+        "remote end closed connection",
+        "502",
+        "503",
+        "504",
+        "rate limit",
+        "too many requests",
+    ]
+    return any(marker in msg for marker in transient_markers)
 
 
 def retry(func, *args, **kwargs):
@@ -160,6 +206,10 @@ def retry(func, *args, **kwargs):
             return func(*args, **kwargs)
         except Exception as e:
             last_error = e
+
+            if not is_retryable_error(e):
+                raise
+
             logging.warning("Attempt %s/%s failed: %s", attempt, MAX_RETRIES, e)
             if attempt < MAX_RETRIES:
                 time.sleep(RETRY_DELAY_SECONDS)
@@ -380,7 +430,8 @@ def choose_topic(state: Dict[str, Any], topics: List[str]) -> str:
 def mark_topic_used(state: Dict[str, Any], topic: str) -> None:
     topic = normalize_topic(topic)
 
-    if topic not in state["used_topics"]:
+    existing = {normalize_topic(t).casefold() for t in state["used_topics"]}
+    if topic.casefold() not in existing:
         state["used_topics"].append(topic)
 
     state["last_topic"] = topic
@@ -388,12 +439,104 @@ def mark_topic_used(state: Dict[str, Any], topic: str) -> None:
     state["last_run_at"] = datetime.datetime.utcnow().isoformat() + "Z"
 
 
-def get_service():
-    with TOKEN_FILE.open("r", encoding="utf-8") as f:
-        info = json.load(f)
+def load_google_credentials_from_env() -> Credentials:
+    if not has_env_google_auth():
+        raise RuntimeError(
+            "Missing GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET / GOOGLE_REFRESH_TOKEN"
+        )
 
-    creds = Credentials.from_authorized_user_info(info)
-    return build("blogger", "v3", credentials=creds)
+    return Credentials(
+        token=None,
+        refresh_token=GOOGLE_REFRESH_TOKEN,
+        token_uri=GOOGLE_TOKEN_URI,
+        client_id=GOOGLE_CLIENT_ID,
+        client_secret=GOOGLE_CLIENT_SECRET,
+        scopes=[BLOGGER_SCOPE],
+    )
+
+
+def load_google_credentials_from_file() -> Credentials:
+    try:
+        raw = TOKEN_FILE.read_text(encoding="utf-8").strip()
+        if not raw:
+            raise RuntimeError("token.json exists but is empty.")
+
+        info = json.loads(raw)
+
+        if not isinstance(info, dict):
+            raise RuntimeError("token.json must contain a JSON object.")
+
+        creds = Credentials.from_authorized_user_info(info, scopes=[BLOGGER_SCOPE])
+
+        if not creds.refresh_token:
+            raise RuntimeError(
+                "token.json does not contain a refresh_token. "
+                "Regenerate OAuth token with offline access."
+            )
+
+        return creds
+
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"token.json is invalid JSON: {e}")
+    except Exception as e:
+        raise RuntimeError(f"Failed to load Blogger credentials from token.json: {e}")
+
+
+def get_google_credentials() -> Credentials:
+    if has_env_google_auth():
+        logging.info("Using Google credentials from environment variables.")
+        return load_google_credentials_from_env()
+
+    logging.info("Using Google credentials from token.json fallback.")
+    return load_google_credentials_from_file()
+
+
+def refresh_credentials(creds: Credentials) -> Credentials:
+    try:
+        creds.refresh(Request())
+        return creds
+    except RefreshError as e:
+        raise RuntimeError(
+            "Google OAuth refresh failed. Your refresh token is expired, revoked, "
+            "or mismatched with the OAuth client. Regenerate GOOGLE_REFRESH_TOKEN."
+        ) from e
+    except Exception as e:
+        raise RuntimeError(f"Failed to refresh Google credentials: {e}") from e
+
+
+def get_service():
+    creds = get_google_credentials()
+    creds = refresh_credentials(creds)
+    return build("blogger", "v3", credentials=creds, cache_discovery=False)
+
+
+def clean_generated_html(content: str, topic: str) -> str:
+    if not content:
+        return content
+
+    cleaned = content.strip()
+
+    cleaned = re.sub(r"^```html\s*", "", cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r"^```\s*", "", cleaned)
+    cleaned = re.sub(r"\s*```$", "", cleaned)
+
+    topic_pattern = re.escape(topic.strip())
+
+    cleaned = re.sub(
+        rf"^\s*<h1[^>]*>\s*{topic_pattern}\s*</h1>\s*",
+        "",
+        cleaned,
+        flags=re.IGNORECASE | re.DOTALL
+    )
+
+    cleaned = re.sub(
+        rf"^\s*<h2[^>]*>\s*{topic_pattern}\s*</h2>\s*",
+        "",
+        cleaned,
+        flags=re.IGNORECASE | re.DOTALL
+    )
+
+    return cleaned.strip()
 
 
 def generate_article(topic: str) -> str:
@@ -406,6 +549,8 @@ Write a 1200-1500 word deep-dive article about "{topic}".
 
 Requirements:
 - Return valid HTML only
+- do NOT include the article title as <h1> or <h2>
+- start directly with the opening narrative or first section
 - Use:
   <h2> for section headings
   <p> for paragraphs
@@ -429,7 +574,7 @@ Requirements:
     if not content:
         raise RuntimeError("Groq returned empty article content.")
 
-    return content
+    return clean_generated_html(content, topic)
 
 
 def get_styled_html(content: str, topic: str) -> str:
@@ -451,7 +596,7 @@ def get_styled_html(content: str, topic: str) -> str:
         <p style="margin:5px 0;color:#9ca3af;">{curr_date} • Unsolved Mysteries &amp; Conspiracies</p>
     </div>
 </div>
-"""
+""".strip()
 
 
 def publish_post(service, topic: str, html: str):
