@@ -10,11 +10,12 @@
     "health|||the benefits of regular massage therapy",
     "productivity|||time blocking for efficient scheduling",
     "tech|||setting up a secure home network",
-    "health|||the importance of zone 2 cardio"
+    "health|||the importance of zone 2 cardio",
+    "habits|||creating a bedtime routine for better sleep"
   ],
-  "last_topic": "The Importance of Zone 2 Cardio",
-  "last_category": "Health",
-  "published_count": 11,
-  "last_run_at": "2026-03-23T09:44:49.039708Z",
+  "last_topic": "Creating a Bedtime Routine for Better Sleep",
+  "last_category": "Habits",
+  "published_count": 12,
+  "last_run_at": "2026-03-23T20:35:50.037322Z",
   "topic_refills": 1
 }
