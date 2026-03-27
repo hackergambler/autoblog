@@ -18,11 +18,12 @@
     "habits|||creating a daily routine for improved time management",
     "finance|||investing in real estate investment trusts",
     "finance|||understanding and managing debt",
-    "health|||the role of probiotics in gut health"
+    "health|||the role of probiotics in gut health",
+    "finance|||the 50/30/20 budgeting rule"
   ],
-  "last_topic": "The Role of Probiotics in Gut Health",
-  "last_category": "Health",
-  "published_count": 19,
-  "last_run_at": "2026-03-27T09:09:24.315147Z",
+  "last_topic": "The 50/30/20 Budgeting Rule",
+  "last_category": "Finance",
+  "published_count": 20,
+  "last_run_at": "2026-03-27T21:24:14.423736Z",
   "topic_refills": 1
 }
