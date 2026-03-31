@@ -25,11 +25,12 @@
     "habits|||creating a habit of journaling for self-reflection",
     "career|||asking for feedback and constructive criticism",
     "health|||the importance of hydration for overall health",
-    "learning|||the benefits of learning a new language"
+    "learning|||the benefits of learning a new language",
+    "habits|||creating a consistent morning routine"
   ],
-  "last_topic": "The Benefits of Learning a New Language",
-  "last_category": "Learning",
-  "published_count": 26,
-  "last_run_at": "2026-03-31T09:35:26.468808Z",
+  "last_topic": "Creating a Consistent Morning Routine",
+  "last_category": "Habits",
+  "published_count": 27,
+  "last_run_at": "2026-03-31T21:28:18.904625Z",
   "topic_refills": 1
 }
