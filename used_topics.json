@@ -24,11 +24,12 @@
     "career|||effective communication strategies for the workplace",
     "habits|||creating a habit of journaling for self-reflection",
     "career|||asking for feedback and constructive criticism",
-    "health|||the importance of hydration for overall health"
+    "health|||the importance of hydration for overall health",
+    "learning|||the benefits of learning a new language"
   ],
-  "last_topic": "The Importance of Hydration for Overall Health",
-  "last_category": "Health",
-  "published_count": 25,
-  "last_run_at": "2026-03-30T21:15:58.809415Z",
+  "last_topic": "The Benefits of Learning a New Language",
+  "last_category": "Learning",
+  "published_count": 26,
+  "last_run_at": "2026-03-31T09:35:26.468808Z",
   "topic_refills": 1
 }
