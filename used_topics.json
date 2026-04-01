@@ -27,11 +27,12 @@
     "health|||the importance of hydration for overall health",
     "learning|||the benefits of learning a new language",
     "habits|||creating a consistent morning routine",
-    "career|||developing leadership skills for career advancement"
+    "career|||developing leadership skills for career advancement",
+    "productivity|||using the getting things done method for task management"
   ],
-  "last_topic": "Developing Leadership Skills for Career Advancement",
-  "last_category": "Career",
-  "published_count": 28,
-  "last_run_at": "2026-04-01T09:56:54.424797Z",
+  "last_topic": "Using the Getting Things Done Method for Task Management",
+  "last_category": "Productivity",
+  "published_count": 29,
+  "last_run_at": "2026-04-01T20:27:32.035995Z",
   "topic_refills": 1
 }
