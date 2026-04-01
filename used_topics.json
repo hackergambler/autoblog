@@ -26,11 +26,12 @@
     "career|||asking for feedback and constructive criticism",
     "health|||the importance of hydration for overall health",
     "learning|||the benefits of learning a new language",
-    "habits|||creating a consistent morning routine"
+    "habits|||creating a consistent morning routine",
+    "career|||developing leadership skills for career advancement"
   ],
-  "last_topic": "Creating a Consistent Morning Routine",
-  "last_category": "Habits",
-  "published_count": 27,
-  "last_run_at": "2026-03-31T21:28:18.904625Z",
+  "last_topic": "Developing Leadership Skills for Career Advancement",
+  "last_category": "Career",
+  "published_count": 28,
+  "last_run_at": "2026-04-01T09:56:54.424797Z",
   "topic_refills": 1
 }
