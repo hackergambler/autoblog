@@ -33,11 +33,12 @@
     "habits|||breaking bad habits and forming new ones",
     "mindset|||overcoming self-doubt and imposter syndrome",
     "health|||intermittent fasting protocols",
-    "learning|||the importance of active learning techniques"
+    "learning|||the importance of active learning techniques",
+    "finance|||understanding and utilizing tax-advantaged accounts"
   ],
-  "last_topic": "The Importance of Active Learning Techniques",
-  "last_category": "Learning",
-  "published_count": 34,
-  "last_run_at": "2026-04-04T09:02:18.265957Z",
+  "last_topic": "Understanding and Utilizing Tax-Advantaged Accounts",
+  "last_category": "Finance",
+  "published_count": 35,
+  "last_run_at": "2026-04-04T21:25:40.463596Z",
   "topic_refills": 1
 }
