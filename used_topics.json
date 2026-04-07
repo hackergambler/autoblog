@@ -39,11 +39,12 @@
     "learning|||the benefits of mentorship for personal growth",
     "productivity|||managing digital distractions for improved focus",
     "career|||crafting a professional online presence",
-    "finance|||how to automate monthly savings"
+    "finance|||how to automate monthly savings",
+    "learning|||how to set effective learning goals"
   ],
-  "last_topic": "How to Automate Monthly Savings",
-  "last_category": "Finance",
-  "published_count": 40,
-  "last_run_at": "2026-04-07T09:36:11.325383Z",
+  "last_topic": "How to Set Effective Learning Goals",
+  "last_category": "Learning",
+  "published_count": 41,
+  "last_run_at": "2026-04-07T20:30:30.189383Z",
   "topic_refills": 1
 }
