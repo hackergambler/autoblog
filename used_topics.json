@@ -46,11 +46,12 @@
     "habits|||developing a reading habit for self-improvement",
     "productivity|||using the 80/20 rule for priority management",
     "career|||creating a personal brand for career advancement",
-    "productivity|||avoiding burnout and maintaining work-life balance"
+    "productivity|||avoiding burnout and maintaining work-life balance",
+    "health|||the importance of getting enough sleep for physical health"
   ],
-  "last_topic": "Avoiding Burnout and Maintaining Work-Life Balance",
-  "last_category": "Productivity",
-  "published_count": 47,
-  "last_run_at": "2026-04-10T21:07:52.624473Z",
+  "last_topic": "The Importance of Getting Enough Sleep for Physical Health",
+  "last_category": "Health",
+  "published_count": 48,
+  "last_run_at": "2026-04-11T08:32:19.918257Z",
   "topic_refills": 2
 }
