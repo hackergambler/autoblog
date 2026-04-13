@@ -50,11 +50,12 @@
     "health|||the importance of getting enough sleep for physical health",
     "mindset|||cultivating a positive body image",
     "tech|||using password managers for enhanced security",
-    "tech|||exploring the world of augmented reality"
+    "tech|||exploring the world of augmented reality",
+    "productivity|||using the time management matrix for priority management"
   ],
-  "last_topic": "Exploring the World of Augmented Reality",
-  "last_category": "Tech",
-  "published_count": 51,
-  "last_run_at": "2026-04-12T21:00:20.834419Z",
+  "last_topic": "Using the Time Management Matrix for Priority Management",
+  "last_category": "Productivity",
+  "published_count": 52,
+  "last_run_at": "2026-04-13T10:18:12.574635Z",
   "topic_refills": 2
 }
