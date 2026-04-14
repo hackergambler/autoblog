@@ -53,11 +53,12 @@
     "tech|||exploring the world of augmented reality",
     "productivity|||using the time management matrix for priority management",
     "productivity|||using music to boost focus and productivity",
-    "career|||developing a personal mission statement"
+    "career|||developing a personal mission statement",
+    "tech|||introduction to web development for beginners"
   ],
-  "last_topic": "Developing a Personal Mission Statement",
-  "last_category": "Career",
-  "published_count": 54,
-  "last_run_at": "2026-04-14T09:50:17.964854Z",
+  "last_topic": "Introduction to Web Development for Beginners",
+  "last_category": "Tech",
+  "published_count": 55,
+  "last_run_at": "2026-04-14T21:16:58.166974Z",
   "topic_refills": 2
 }
