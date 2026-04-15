@@ -54,11 +54,12 @@
     "productivity|||using the time management matrix for priority management",
     "productivity|||using music to boost focus and productivity",
     "career|||developing a personal mission statement",
-    "tech|||introduction to web development for beginners"
+    "tech|||introduction to web development for beginners",
+    "tech|||essential cybersecurity measures for remote workers"
   ],
-  "last_topic": "Introduction to Web Development for Beginners",
+  "last_topic": "Essential Cybersecurity Measures for Remote Workers",
   "last_category": "Tech",
-  "published_count": 55,
-  "last_run_at": "2026-04-14T21:16:58.166974Z",
+  "published_count": 56,
+  "last_run_at": "2026-04-15T09:00:26.471416Z",
   "topic_refills": 2
 }
