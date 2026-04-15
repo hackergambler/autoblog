@@ -55,11 +55,12 @@
     "productivity|||using music to boost focus and productivity",
     "career|||developing a personal mission statement",
     "tech|||introduction to web development for beginners",
-    "tech|||essential cybersecurity measures for remote workers"
+    "tech|||essential cybersecurity measures for remote workers",
+    "health|||the importance of vitamin d for overall health"
   ],
-  "last_topic": "Essential Cybersecurity Measures for Remote Workers",
-  "last_category": "Tech",
-  "published_count": 56,
-  "last_run_at": "2026-04-15T09:00:26.471416Z",
+  "last_topic": "The Importance of Vitamin D for Overall Health",
+  "last_category": "Health",
+  "published_count": 57,
+  "last_run_at": "2026-04-15T20:39:31.537883Z",
   "topic_refills": 2
 }
