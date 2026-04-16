@@ -56,11 +56,12 @@
     "career|||developing a personal mission statement",
     "tech|||introduction to web development for beginners",
     "tech|||essential cybersecurity measures for remote workers",
-    "health|||the importance of vitamin d for overall health"
+    "health|||the importance of vitamin d for overall health",
+    "career|||building a strong professional portfolio"
   ],
-  "last_topic": "The Importance of Vitamin D for Overall Health",
-  "last_category": "Health",
-  "published_count": 57,
-  "last_run_at": "2026-04-15T20:39:31.537883Z",
+  "last_topic": "Building a Strong Professional Portfolio",
+  "last_category": "Career",
+  "published_count": 58,
+  "last_run_at": "2026-04-16T08:42:10.801694Z",
   "topic_refills": 2
 }
