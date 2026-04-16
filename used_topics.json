@@ -57,11 +57,12 @@
     "tech|||introduction to web development for beginners",
     "tech|||essential cybersecurity measures for remote workers",
     "health|||the importance of vitamin d for overall health",
-    "career|||building a strong professional portfolio"
+    "career|||building a strong professional portfolio",
+    "tech|||using productivity apps for organization"
   ],
-  "last_topic": "Building a Strong Professional Portfolio",
-  "last_category": "Career",
-  "published_count": 58,
-  "last_run_at": "2026-04-16T08:42:10.801694Z",
+  "last_topic": "Using Productivity Apps for Organization",
+  "last_category": "Tech",
+  "published_count": 59,
+  "last_run_at": "2026-04-16T21:57:51.371154Z",
   "topic_refills": 2
 }
