@@ -59,11 +59,12 @@
     "health|||the importance of vitamin d for overall health",
     "career|||building a strong professional portfolio",
     "tech|||using productivity apps for organization",
-    "habits|||building a daily meditation practice"
+    "habits|||building a daily meditation practice",
+    "career|||building a professional network"
   ],
-  "last_topic": "Building a Daily Meditation Practice",
-  "last_category": "Habits",
-  "published_count": 60,
-  "last_run_at": "2026-04-17T09:15:15.010048Z",
+  "last_topic": "Building a Professional Network",
+  "last_category": "Career",
+  "published_count": 61,
+  "last_run_at": "2026-04-17T21:52:53.549045Z",
   "topic_refills": 2
 }
