@@ -62,11 +62,12 @@
     "habits|||building a daily meditation practice",
     "career|||building a professional network",
     "habits|||creating a weekly review for improved productivity",
-    "learning|||the benefits of participating in online communities"
+    "learning|||the benefits of participating in online communities",
+    "tech|||mastering the linux command line"
   ],
-  "last_topic": "The Benefits of Participating in Online Communities",
-  "last_category": "Learning",
-  "published_count": 63,
-  "last_run_at": "2026-04-18T21:38:00.077386Z",
+  "last_topic": "Mastering the Linux Command Line",
+  "last_category": "Tech",
+  "published_count": 64,
+  "last_run_at": "2026-04-19T09:47:06.915968Z",
   "topic_refills": 2
 }
