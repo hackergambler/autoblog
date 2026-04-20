@@ -65,11 +65,12 @@
     "learning|||the benefits of participating in online communities",
     "tech|||mastering the linux command line",
     "finance|||creating a budget for irregular income",
-    "tech|||introduction to graphic design for non-designers"
+    "tech|||introduction to graphic design for non-designers",
+    "finance|||investing in a retirement fund"
   ],
-  "last_topic": "Introduction to Graphic Design for Non-Designers",
-  "last_category": "Tech",
-  "published_count": 66,
-  "last_run_at": "2026-04-20T10:36:42.077758Z",
+  "last_topic": "Investing in a Retirement Fund",
+  "last_category": "Finance",
+  "published_count": 67,
+  "last_run_at": "2026-04-20T21:51:02.113841Z",
   "topic_refills": 2
 }
