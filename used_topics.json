@@ -64,11 +64,12 @@
     "habits|||creating a weekly review for improved productivity",
     "learning|||the benefits of participating in online communities",
     "tech|||mastering the linux command line",
-    "finance|||creating a budget for irregular income"
+    "finance|||creating a budget for irregular income",
+    "tech|||introduction to graphic design for non-designers"
   ],
-  "last_topic": "Creating a Budget for Irregular Income",
-  "last_category": "Finance",
-  "published_count": 65,
-  "last_run_at": "2026-04-19T20:47:33.245980Z",
+  "last_topic": "Introduction to Graphic Design for Non-Designers",
+  "last_category": "Tech",
+  "published_count": 66,
+  "last_run_at": "2026-04-20T10:36:42.077758Z",
   "topic_refills": 2
 }
