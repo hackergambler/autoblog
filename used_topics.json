@@ -67,11 +67,12 @@
     "finance|||creating a budget for irregular income",
     "tech|||introduction to graphic design for non-designers",
     "finance|||investing in a retirement fund",
-    "habits|||building resilience through physical activity"
+    "habits|||building resilience through physical activity",
+    "learning|||the importance of continuous education"
   ],
-  "last_topic": "Building Resilience Through Physical Activity",
-  "last_category": "Habits",
-  "published_count": 68,
-  "last_run_at": "2026-04-21T09:23:58.000781Z",
+  "last_topic": "The Importance of Continuous Education",
+  "last_category": "Learning",
+  "published_count": 69,
+  "last_run_at": "2026-04-21T20:44:47.105771Z",
   "topic_refills": 2
 }
