@@ -66,11 +66,12 @@
     "tech|||mastering the linux command line",
     "finance|||creating a budget for irregular income",
     "tech|||introduction to graphic design for non-designers",
-    "finance|||investing in a retirement fund"
+    "finance|||investing in a retirement fund",
+    "habits|||building resilience through physical activity"
   ],
-  "last_topic": "Investing in a Retirement Fund",
-  "last_category": "Finance",
-  "published_count": 67,
-  "last_run_at": "2026-04-20T21:51:02.113841Z",
+  "last_topic": "Building Resilience Through Physical Activity",
+  "last_category": "Habits",
+  "published_count": 68,
+  "last_run_at": "2026-04-21T09:23:58.000781Z",
   "topic_refills": 2
 }
