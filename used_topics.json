@@ -72,11 +72,12 @@
     "mindset|||developing a growth mindset in adulthood",
     "mindset|||the power of self-awareness for personal growth",
     "career|||effective networking strategies for introverts",
-    "tech|||introduction to data privacy and protection"
+    "tech|||introduction to data privacy and protection",
+    "productivity|||the power of batch processing for efficient work"
   ],
-  "last_topic": "Introduction to Data Privacy and Protection",
-  "last_category": "Tech",
-  "published_count": 73,
-  "last_run_at": "2026-04-23T21:08:45.391090Z",
+  "last_topic": "The Power of Batch Processing for Efficient Work",
+  "last_category": "Productivity",
+  "published_count": 74,
+  "last_run_at": "2026-04-24T10:59:47.333787Z",
   "topic_refills": 2
 }
