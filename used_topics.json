@@ -73,11 +73,12 @@
     "mindset|||the power of self-awareness for personal growth",
     "career|||effective networking strategies for introverts",
     "tech|||introduction to data privacy and protection",
-    "productivity|||the power of batch processing for efficient work"
+    "productivity|||the power of batch processing for efficient work",
+    "health|||the importance of regular health check-ups"
   ],
-  "last_topic": "The Power of Batch Processing for Efficient Work",
-  "last_category": "Productivity",
-  "published_count": 74,
-  "last_run_at": "2026-04-24T10:59:47.333787Z",
+  "last_topic": "The Importance of Regular Health Check-Ups",
+  "last_category": "Health",
+  "published_count": 75,
+  "last_run_at": "2026-04-24T20:21:02.878399Z",
   "topic_refills": 2
 }
