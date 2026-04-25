@@ -74,11 +74,12 @@
     "career|||effective networking strategies for introverts",
     "tech|||introduction to data privacy and protection",
     "productivity|||the power of batch processing for efficient work",
-    "health|||the importance of regular health check-ups"
+    "health|||the importance of regular health check-ups",
+    "finance|||how to create a budget for a big purchase"
   ],
-  "last_topic": "The Importance of Regular Health Check-Ups",
-  "last_category": "Health",
-  "published_count": 75,
-  "last_run_at": "2026-04-24T20:21:02.878399Z",
+  "last_topic": "How to Create a Budget for a Big Purchase",
+  "last_category": "Finance",
+  "published_count": 76,
+  "last_run_at": "2026-04-25T09:33:17.622846Z",
   "topic_refills": 2
 }
