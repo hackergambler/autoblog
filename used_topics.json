@@ -87,11 +87,12 @@
     "health|||the benefits of forest bathing for mental health",
     "finance|||how to save money on groceries and household expenses",
     "career|||effective strategies for career transition",
-    "career|||navigating office politics for career success"
+    "career|||navigating office politics for career success",
+    "tech|||understanding the basics of artificial intelligence"
   ],
-  "last_topic": "Navigating Office Politics for Career Success",
-  "last_category": "Career",
-  "published_count": 88,
-  "last_run_at": "2026-05-01T10:01:39.810647Z",
+  "last_topic": "Understanding the Basics of Artificial Intelligence",
+  "last_category": "Tech",
+  "published_count": 89,
+  "last_run_at": "2026-05-01T21:29:16.147919Z",
   "topic_refills": 3
 }
