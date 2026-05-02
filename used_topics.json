@@ -88,11 +88,12 @@
     "finance|||how to save money on groceries and household expenses",
     "career|||effective strategies for career transition",
     "career|||navigating office politics for career success",
-    "tech|||understanding the basics of artificial intelligence"
+    "tech|||understanding the basics of artificial intelligence",
+    "habits|||forming healthy eating habits for long-term health"
   ],
-  "last_topic": "Understanding the Basics of Artificial Intelligence",
-  "last_category": "Tech",
-  "published_count": 89,
-  "last_run_at": "2026-05-01T21:29:16.147919Z",
+  "last_topic": "Forming Healthy Eating Habits for Long-Term Health",
+  "last_category": "Habits",
+  "published_count": 90,
+  "last_run_at": "2026-05-02T09:29:10.090419Z",
   "topic_refills": 3
 }
