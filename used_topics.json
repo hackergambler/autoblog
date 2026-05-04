@@ -93,11 +93,12 @@
     "finance|||how to save money on home expenses",
     "productivity|||using the don't break the chain technique for habit formation",
     "mindset|||cultivating resilience in the face of adversity",
-    "learning|||the benefits of reading fiction for personal growth"
+    "learning|||the benefits of reading fiction for personal growth",
+    "tech|||the ethics of artificial intelligence"
   ],
-  "last_topic": "The Benefits of Reading Fiction for Personal Growth",
-  "last_category": "Learning",
-  "published_count": 94,
-  "last_run_at": "2026-05-04T11:15:45.840665Z",
+  "last_topic": "The Ethics of Artificial Intelligence",
+  "last_category": "Tech",
+  "published_count": 95,
+  "last_run_at": "2026-05-04T21:07:43.513650Z",
   "topic_refills": 3
 }
