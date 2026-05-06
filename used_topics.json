@@ -96,11 +96,12 @@
     "learning|||the benefits of reading fiction for personal growth",
     "tech|||the ethics of artificial intelligence",
     "learning|||the benefits of speed reading for improved comprehension",
-    "habits|||building a morning routine for improved energy"
+    "habits|||building a morning routine for improved energy",
+    "tech|||introduction to cybersecurity for personal protection"
   ],
-  "last_topic": "Building a Morning Routine for Improved Energy",
-  "last_category": "Habits",
-  "published_count": 97,
-  "last_run_at": "2026-05-05T20:32:55.792530Z",
+  "last_topic": "Introduction to Cybersecurity for Personal Protection",
+  "last_category": "Tech",
+  "published_count": 98,
+  "last_run_at": "2026-05-06T09:56:32.558443Z",
   "topic_refills": 3
 }
