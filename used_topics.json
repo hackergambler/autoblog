@@ -99,11 +99,12 @@
     "habits|||building a morning routine for improved energy",
     "tech|||introduction to cybersecurity for personal protection",
     "finance|||how to save money on travel expenses",
-    "mindset|||developing a growth mindset in the workplace"
+    "mindset|||developing a growth mindset in the workplace",
+    "productivity|||using the eisenhower matrix for priority management"
   ],
-  "last_topic": "Developing a Growth Mindset in the Workplace",
-  "last_category": "Mindset",
-  "published_count": 100,
-  "last_run_at": "2026-05-07T10:57:13.514476Z",
+  "last_topic": "Using the Eisenhower Matrix for Priority Management",
+  "last_category": "Productivity",
+  "published_count": 101,
+  "last_run_at": "2026-05-07T21:59:14.475754Z",
   "topic_refills": 3
 }
