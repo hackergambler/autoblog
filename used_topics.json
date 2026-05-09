@@ -103,11 +103,12 @@
     "productivity|||using the eisenhower matrix for priority management",
     "career|||developing a strong resume for job applications",
     "learning|||the benefits of attending workshops and conferences",
-    "tech|||introduction to podcasting for personal branding"
+    "tech|||introduction to podcasting for personal branding",
+    "finance|||understanding and managing cryptocurrency investments"
   ],
-  "last_topic": "Introduction to Podcasting for Personal Branding",
-  "last_category": "Tech",
-  "published_count": 104,
-  "last_run_at": "2026-05-09T09:01:11.179764Z",
+  "last_topic": "Understanding and Managing Cryptocurrency Investments",
+  "last_category": "Finance",
+  "published_count": 105,
+  "last_run_at": "2026-05-09T20:43:46.585202Z",
   "topic_refills": 3
 }
