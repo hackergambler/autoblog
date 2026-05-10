@@ -104,11 +104,12 @@
     "career|||developing a strong resume for job applications",
     "learning|||the benefits of attending workshops and conferences",
     "tech|||introduction to podcasting for personal branding",
-    "finance|||understanding and managing cryptocurrency investments"
+    "finance|||understanding and managing cryptocurrency investments",
+    "learning|||the benefits of learning to code for non-technical professionals"
   ],
-  "last_topic": "Understanding and Managing Cryptocurrency Investments",
-  "last_category": "Finance",
-  "published_count": 105,
-  "last_run_at": "2026-05-09T20:43:46.585202Z",
+  "last_topic": "The Benefits of Learning to Code for Non-Technical Professionals",
+  "last_category": "Learning",
+  "published_count": 106,
+  "last_run_at": "2026-05-10T09:48:51.686526Z",
   "topic_refills": 3
 }
