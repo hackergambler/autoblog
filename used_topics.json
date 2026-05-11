@@ -106,11 +106,12 @@
     "tech|||introduction to podcasting for personal branding",
     "finance|||understanding and managing cryptocurrency investments",
     "learning|||the benefits of learning to code for non-technical professionals",
-    "finance|||how to save money on everyday expenses"
+    "finance|||how to save money on everyday expenses",
+    "health|||managing chronic stress and anxiety"
   ],
-  "last_topic": "How to Save Money on Everyday Expenses",
-  "last_category": "Finance",
-  "published_count": 107,
-  "last_run_at": "2026-05-10T20:51:40.059179Z",
+  "last_topic": "Managing Chronic Stress and Anxiety",
+  "last_category": "Health",
+  "published_count": 108,
+  "last_run_at": "2026-05-11T12:32:46.460553Z",
   "topic_refills": 3
 }
