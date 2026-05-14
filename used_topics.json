@@ -112,11 +112,12 @@
     "mindset|||practicing mindfulness and meditation",
     "productivity|||using the eat that frog technique for priority management",
     "health|||healthy meal planning on a budget",
-    "health|||the importance of regular exercise for mental health"
+    "health|||the importance of regular exercise for mental health",
+    "tech|||introduction to data analysis for personal use"
   ],
-  "last_topic": "The Importance of Regular Exercise for Mental Health",
-  "last_category": "Health",
-  "published_count": 113,
-  "last_run_at": "2026-05-13T21:43:41.284752Z",
+  "last_topic": "Introduction to Data Analysis for Personal Use",
+  "last_category": "Tech",
+  "published_count": 114,
+  "last_run_at": "2026-05-14T10:20:37.437353Z",
   "topic_refills": 4
 }
