@@ -114,11 +114,12 @@
     "health|||healthy meal planning on a budget",
     "health|||the importance of regular exercise for mental health",
     "tech|||introduction to data analysis for personal use",
-    "learning|||the benefits of learning a new language for personal growth"
+    "learning|||the benefits of learning a new language for personal growth",
+    "health|||the benefits of yoga for physical and mental wellbeing"
   ],
-  "last_topic": "The Benefits of Learning a New Language for Personal Growth",
-  "last_category": "Learning",
-  "published_count": 115,
-  "last_run_at": "2026-05-14T21:24:03.936282Z",
+  "last_topic": "The Benefits of Yoga for Physical and Mental Wellbeing",
+  "last_category": "Health",
+  "published_count": 116,
+  "last_run_at": "2026-05-15T10:47:38.766181Z",
   "topic_refills": 4
 }
