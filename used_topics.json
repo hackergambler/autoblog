@@ -115,11 +115,12 @@
     "health|||the importance of regular exercise for mental health",
     "tech|||introduction to data analysis for personal use",
     "learning|||the benefits of learning a new language for personal growth",
-    "health|||the benefits of yoga for physical and mental wellbeing"
+    "health|||the benefits of yoga for physical and mental wellbeing",
+    "learning|||the benefits of learning to write for personal growth"
   ],
-  "last_topic": "The Benefits of Yoga for Physical and Mental Wellbeing",
-  "last_category": "Health",
-  "published_count": 116,
-  "last_run_at": "2026-05-15T10:47:38.766181Z",
+  "last_topic": "The Benefits of Learning to Write for Personal Growth",
+  "last_category": "Learning",
+  "published_count": 117,
+  "last_run_at": "2026-05-15T22:07:08.655129Z",
   "topic_refills": 4
 }
