@@ -116,11 +116,12 @@
     "tech|||introduction to data analysis for personal use",
     "learning|||the benefits of learning a new language for personal growth",
     "health|||the benefits of yoga for physical and mental wellbeing",
-    "learning|||the benefits of learning to write for personal growth"
+    "learning|||the benefits of learning to write for personal growth",
+    "habits|||creating a nighttime routine for improved sleep"
   ],
-  "last_topic": "The Benefits of Learning to Write for Personal Growth",
-  "last_category": "Learning",
-  "published_count": 117,
-  "last_run_at": "2026-05-15T22:07:08.655129Z",
+  "last_topic": "Creating a Nighttime Routine for Improved Sleep",
+  "last_category": "Habits",
+  "published_count": 118,
+  "last_run_at": "2026-05-16T09:50:58.704697Z",
   "topic_refills": 4
 }
