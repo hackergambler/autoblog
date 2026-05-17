@@ -118,11 +118,12 @@
     "health|||the benefits of yoga for physical and mental wellbeing",
     "learning|||the benefits of learning to write for personal growth",
     "habits|||creating a nighttime routine for improved sleep",
-    "mindset|||the importance of setting healthy boundaries"
+    "mindset|||the importance of setting healthy boundaries",
+    "mindset|||cultivating self-discipline for achieving goals"
   ],
-  "last_topic": "The Importance of Setting Healthy Boundaries",
+  "last_topic": "Cultivating Self-Discipline for Achieving Goals",
   "last_category": "Mindset",
-  "published_count": 119,
-  "last_run_at": "2026-05-16T21:01:13.794132Z",
+  "published_count": 120,
+  "last_run_at": "2026-05-17T10:34:25.599193Z",
   "topic_refills": 4
 }
