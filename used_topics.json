@@ -125,11 +125,12 @@
     "health|||the benefits of drinking enough water for physical health",
     "mindset|||how to overcome self-doubt and imposter syndrome",
     "learning|||the benefits of reading non-fiction books for personal growth",
-    "mindset|||growth mindset vs fixed mindset"
+    "mindset|||growth mindset vs fixed mindset",
+    "career|||developing a career development plan"
   ],
-  "last_topic": "Growth Mindset vs Fixed Mindset",
-  "last_category": "Mindset",
-  "published_count": 126,
-  "last_run_at": "2026-05-20T12:20:25.086763Z",
+  "last_topic": "Developing a Career Development Plan",
+  "last_category": "Career",
+  "published_count": 127,
+  "last_run_at": "2026-05-20T21:15:42.794943Z",
   "topic_refills": 4
 }
