@@ -137,11 +137,12 @@
     "health|||the importance of stretching for physical health",
     "health|||the benefits of incorporating probiotics into your diet",
     "career|||effective strategies for building a professional network",
-    "career|||developing a career advancement plan"
+    "career|||developing a career advancement plan",
+    "tech|||staying safe from online phishing scams"
   ],
-  "last_topic": "Developing a Career Advancement Plan",
-  "last_category": "Career",
-  "published_count": 138,
-  "last_run_at": "2026-05-26T22:06:24.263573Z",
+  "last_topic": "Staying Safe from Online Phishing Scams",
+  "last_category": "Tech",
+  "published_count": 139,
+  "last_run_at": "2026-05-27T12:37:34.285475Z",
   "topic_refills": 4
 }
