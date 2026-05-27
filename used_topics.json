@@ -138,11 +138,12 @@
     "health|||the benefits of incorporating probiotics into your diet",
     "career|||effective strategies for building a professional network",
     "career|||developing a career advancement plan",
-    "tech|||staying safe from online phishing scams"
+    "tech|||staying safe from online phishing scams",
+    "finance|||how to negotiate your salary"
   ],
-  "last_topic": "Staying Safe from Online Phishing Scams",
-  "last_category": "Tech",
-  "published_count": 139,
-  "last_run_at": "2026-05-27T12:37:34.285475Z",
+  "last_topic": "How to Negotiate Your Salary",
+  "last_category": "Finance",
+  "published_count": 140,
+  "last_run_at": "2026-05-27T22:16:02.730260Z",
   "topic_refills": 4
 }
