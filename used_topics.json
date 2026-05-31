@@ -145,11 +145,12 @@
     "health|||the importance of getting enough morning sunlight for physical health",
     "habits|||building a habit of self-care for improved wellbeing",
     "finance|||creating a side hustle for extra income",
-    "tech|||introduction to user experience design for personal projects"
+    "tech|||introduction to user experience design for personal projects",
+    "tech|||introduction to e-commerce for small business owners"
   ],
-  "last_topic": "Introduction to User Experience Design for Personal Projects",
+  "last_topic": "Introduction to E-Commerce for Small Business Owners",
   "last_category": "Tech",
-  "published_count": 146,
-  "last_run_at": "2026-05-30T20:33:49.458376Z",
+  "published_count": 147,
+  "last_run_at": "2026-05-31T11:12:04.993863Z",
   "topic_refills": 4
 }
