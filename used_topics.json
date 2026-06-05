@@ -155,11 +155,12 @@
     "health|||the importance of regular dental care",
     "mindset|||developing a growth mindset for improved resilience",
     "career|||effective strategies for managing workplace stress",
-    "learning|||the benefits of taking online courses for professional development"
+    "learning|||the benefits of taking online courses for professional development",
+    "learning|||the benefits of attending online webinars for professional development"
   ],
-  "last_topic": "The Benefits of Taking Online Courses for Professional Development",
+  "last_topic": "The Benefits of Attending Online Webinars for Professional Development",
   "last_category": "Learning",
-  "published_count": 156,
-  "last_run_at": "2026-06-04T22:00:15.005393Z",
+  "published_count": 157,
+  "last_run_at": "2026-06-05T11:26:54.941156Z",
   "topic_refills": 4
 }
