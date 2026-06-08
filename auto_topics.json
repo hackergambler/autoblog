@@ -763,8 +763,232 @@
     {
       "category": "Learning",
       "topic": "The Benefits of Learning a New Hobby for Personal Growth"
+    },
+    {
+      "category": "Mindset",
+      "topic": "How to Overcome Self-Doubt and Boost Confidence"
+    },
+    {
+      "category": "Finance",
+      "topic": "Understanding Credit Scores and How to Improve Them"
+    },
+    {
+      "category": "Health",
+      "topic": "The Importance of Getting Regular Health Check-Ups"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Using the Pomodoro Technique for Improved Focus"
+    },
+    {
+      "category": "Career",
+      "topic": "Effective Strategies for Networking in Your Industry"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Consistent Daily Schedule for Improved Productivity"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Benefits of Taking a Break from Technology for Mental Health"
+    },
+    {
+      "category": "Mindset",
+      "topic": "Developing a Positive Attitude Towards Failure"
+    },
+    {
+      "category": "Finance",
+      "topic": "How to Create a Budget for Travel Expenses"
+    },
+    {
+      "category": "Health",
+      "topic": "The Importance of Practicing Good Hygiene for Physical Health"
+    },
+    {
+      "category": "Tech",
+      "topic": "Introduction to Artificial Intelligence for Beginners"
+    },
+    {
+      "category": "Career",
+      "topic": "Effective Strategies for Creating a Professional Online Portfolio"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Habit of Regularly Practicing Gratitude Journaling"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Benefits of Learning a New Sport for Personal Growth"
+    },
+    {
+      "category": "Mindset",
+      "topic": "Cultivating Self-Awareness for Improved Relationships"
+    },
+    {
+      "category": "Finance",
+      "topic": "How to Invest in a Small Business"
+    },
+    {
+      "category": "Health",
+      "topic": "The Importance of Getting Enough Rest for Physical Health"
+    },
+    {
+      "category": "Tech",
+      "topic": "Introduction to Cybersecurity for Small Business Owners"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Using the Time Blocking Method for Schedule Management"
+    },
+    {
+      "category": "Career",
+      "topic": "Effective Strategies for Creating a Career Development Plan"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Habit of Regularly Practicing Yoga for Improved Flexibility"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Benefits of Learning a New Programming Language for Personal Growth"
+    },
+    {
+      "category": "Mindset",
+      "topic": "Developing a Growth Mindset for Improved Learning"
+    },
+    {
+      "category": "Finance",
+      "topic": "How to Create a Budget for a Wedding"
+    },
+    {
+      "category": "Health",
+      "topic": "The Importance of Incorporating Fiber into Your Diet"
+    },
+    {
+      "category": "Tech",
+      "topic": "Introduction to Digital Marketing for Small Business Owners"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Using the Kanban Method for Task Management"
+    },
+    {
+      "category": "Career",
+      "topic": "Effective Strategies for Creating a Professional Network on LinkedIn"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Habit of Regularly Practicing Meditation for Improved Mental Health"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Benefits of Learning a New Language for Travel"
+    },
+    {
+      "category": "Mindset",
+      "topic": "How to Build Confidence in Public Speaking"
+    },
+    {
+      "category": "Finance",
+      "topic": "Understanding the Benefits of a Roth IRA"
+    },
+    {
+      "category": "Health",
+      "topic": "The Importance of Getting Enough Vitamin D for Bone Health"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Using the Eisenhower Matrix for Decision Making"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Habit of Regularly Practicing Journaling"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Benefits of Learning to Code for Career Advancement"
+    },
+    {
+      "category": "Finance",
+      "topic": "How to Navigate a Stock Market Downturn"
+    },
+    {
+      "category": "Health",
+      "topic": "The Importance of Incorporating Omega-3 Fatty Acids into Your Diet"
+    },
+    {
+      "category": "Tech",
+      "topic": "Introduction to Data Analytics for Personal Finance"
+    },
+    {
+      "category": "Career",
+      "topic": "Effective Strategies for Switching to a New Industry"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Habit of Regularly Practicing Stretching"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Benefits of Learning to Create a Podcast"
+    },
+    {
+      "category": "Finance",
+      "topic": "Understanding the Benefits of a 529 College Savings Plan"
+    },
+    {
+      "category": "Health",
+      "topic": "The Importance of Incorporating Probiotics into Your Diet for Gut Health"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Using the Don't Break the Chain Method for Habit Formation"
+    },
+    {
+      "category": "Career",
+      "topic": "Effective Strategies for Creating a Professional Resume"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Habit of Regularly Practicing Tai Chi"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Benefits of Learning to Create a YouTube Channel"
+    },
+    {
+      "category": "Mindset",
+      "topic": "Cultivating Emotional Intelligence for Improved Relationships"
+    },
+    {
+      "category": "Finance",
+      "topic": "How to Create a Budget for a Home Renovation"
+    },
+    {
+      "category": "Health",
+      "topic": "The Importance of Incorporating Turmeric into Your Diet for Anti-Inflammatory Benefits"
+    },
+    {
+      "category": "Tech",
+      "topic": "Introduction to Cybersecurity for Personal Devices"
+    },
+    {
+      "category": "Productivity",
+      "topic": "Using the Task Segmentation Method for Improved Focus"
+    },
+    {
+      "category": "Career",
+      "topic": "Effective Strategies for Negotiating a Freelance Contract"
+    },
+    {
+      "category": "Habits",
+      "topic": "Creating a Habit of Regularly Practicing Qigong"
+    },
+    {
+      "category": "Learning",
+      "topic": "The Benefits of Learning to Create an Online Course"
     }
   ],
-  "updated_at": "2026-05-11T22:19:37.069019Z",
-  "count": 191
+  "updated_at": "2026-06-08T12:43:37.154803Z",
+  "count": 247
 }
