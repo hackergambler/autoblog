@@ -165,11 +165,12 @@
     "health|||the importance of incorporating probiotics into your diet for gut health",
     "finance|||how to save money on entertainment expenses",
     "career|||effective strategies for creating a professional online portfolio",
-    "tech|||introduction to digital photography for beginners"
+    "tech|||introduction to digital photography for beginners",
+    "tech|||introduction to data analytics for personal finance"
   ],
-  "last_topic": "Introduction to Digital Photography for Beginners",
+  "last_topic": "Introduction to Data Analytics for Personal Finance",
   "last_category": "Tech",
-  "published_count": 166,
-  "last_run_at": "2026-06-09T22:05:23.078275Z",
+  "published_count": 167,
+  "last_run_at": "2026-06-10T12:00:41.397906Z",
   "topic_refills": 5
 }
