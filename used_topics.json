@@ -166,11 +166,12 @@
     "finance|||how to save money on entertainment expenses",
     "career|||effective strategies for creating a professional online portfolio",
     "tech|||introduction to digital photography for beginners",
-    "tech|||introduction to data analytics for personal finance"
+    "tech|||introduction to data analytics for personal finance",
+    "productivity|||using the scrum method for team productivity"
   ],
-  "last_topic": "Introduction to Data Analytics for Personal Finance",
-  "last_category": "Tech",
-  "published_count": 167,
-  "last_run_at": "2026-06-10T12:00:41.397906Z",
+  "last_topic": "Using the Scrum Method for Team Productivity",
+  "last_category": "Productivity",
+  "published_count": 168,
+  "last_run_at": "2026-06-10T23:09:31.156196Z",
   "topic_refills": 5
 }
