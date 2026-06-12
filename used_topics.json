@@ -170,11 +170,12 @@
     "productivity|||using the scrum method for team productivity",
     "learning|||the benefits of learning to create a youtube channel",
     "mindset|||cultivating humility for improved relationships",
-    "tech|||introduction to artificial intelligence for beginners"
+    "tech|||introduction to artificial intelligence for beginners",
+    "finance|||how to create a budget for travel expenses"
   ],
-  "last_topic": "Introduction to Artificial Intelligence for Beginners",
-  "last_category": "Tech",
-  "published_count": 171,
-  "last_run_at": "2026-06-12T11:31:57.256274Z",
+  "last_topic": "How to Create a Budget for Travel Expenses",
+  "last_category": "Finance",
+  "published_count": 172,
+  "last_run_at": "2026-06-12T22:24:54.326582Z",
   "topic_refills": 5
 }
