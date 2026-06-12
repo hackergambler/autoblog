@@ -169,11 +169,12 @@
     "tech|||introduction to data analytics for personal finance",
     "productivity|||using the scrum method for team productivity",
     "learning|||the benefits of learning to create a youtube channel",
-    "mindset|||cultivating humility for improved relationships"
+    "mindset|||cultivating humility for improved relationships",
+    "tech|||introduction to artificial intelligence for beginners"
   ],
-  "last_topic": "Cultivating Humility for Improved Relationships",
-  "last_category": "Mindset",
-  "published_count": 170,
-  "last_run_at": "2026-06-11T22:49:58.903104Z",
+  "last_topic": "Introduction to Artificial Intelligence for Beginners",
+  "last_category": "Tech",
+  "published_count": 171,
+  "last_run_at": "2026-06-12T11:31:57.256274Z",
   "topic_refills": 5
 }
