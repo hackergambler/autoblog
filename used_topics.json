@@ -178,11 +178,12 @@
     "productivity|||using the priority matrix for task management",
     "learning|||the benefits of learning a new programming language for personal growth",
     "learning|||the benefits of learning to create an online course",
-    "learning|||the benefits of learning a new sport for personal growth"
+    "learning|||the benefits of learning a new sport for personal growth",
+    "tech|||introduction to cybersecurity for personal devices"
   ],
-  "last_topic": "The Benefits of Learning a New Sport for Personal Growth",
-  "last_category": "Learning",
-  "published_count": 179,
-  "last_run_at": "2026-06-16T12:27:57.553991Z",
+  "last_topic": "Introduction to Cybersecurity for Personal Devices",
+  "last_category": "Tech",
+  "published_count": 180,
+  "last_run_at": "2026-06-16T23:39:35.636162Z",
   "topic_refills": 5
 }
