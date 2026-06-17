@@ -179,11 +179,12 @@
     "learning|||the benefits of learning a new programming language for personal growth",
     "learning|||the benefits of learning to create an online course",
     "learning|||the benefits of learning a new sport for personal growth",
-    "tech|||introduction to cybersecurity for personal devices"
+    "tech|||introduction to cybersecurity for personal devices",
+    "career|||effective strategies for switching to a new industry"
   ],
-  "last_topic": "Introduction to Cybersecurity for Personal Devices",
-  "last_category": "Tech",
-  "published_count": 180,
-  "last_run_at": "2026-06-16T23:39:35.636162Z",
+  "last_topic": "Effective Strategies for Switching to a New Industry",
+  "last_category": "Career",
+  "published_count": 181,
+  "last_run_at": "2026-06-17T12:09:12.623119Z",
   "topic_refills": 5
 }
