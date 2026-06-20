@@ -185,11 +185,12 @@
     "mindset|||cultivating forgiveness for improved mental health",
     "mindset|||how to build confidence in public speaking",
     "health|||the importance of practicing good hygiene for physical health",
-    "habits|||creating a consistent weekly review for improved productivity"
+    "habits|||creating a consistent weekly review for improved productivity",
+    "tech|||introduction to virtual private networks for online security"
   ],
-  "last_topic": "Creating a Consistent Weekly Review for Improved Productivity",
-  "last_category": "Habits",
-  "published_count": 186,
-  "last_run_at": "2026-06-19T21:27:04.114731Z",
+  "last_topic": "Introduction to Virtual Private Networks for Online Security",
+  "last_category": "Tech",
+  "published_count": 187,
+  "last_run_at": "2026-06-20T10:24:43.742283Z",
   "topic_refills": 5
 }
