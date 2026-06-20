@@ -186,11 +186,12 @@
     "mindset|||how to build confidence in public speaking",
     "health|||the importance of practicing good hygiene for physical health",
     "habits|||creating a consistent weekly review for improved productivity",
-    "tech|||introduction to virtual private networks for online security"
+    "tech|||introduction to virtual private networks for online security",
+    "health|||the importance of getting enough rest for physical health"
   ],
-  "last_topic": "Introduction to Virtual Private Networks for Online Security",
-  "last_category": "Tech",
-  "published_count": 187,
-  "last_run_at": "2026-06-20T10:24:43.742283Z",
+  "last_topic": "The Importance of Getting Enough Rest for Physical Health",
+  "last_category": "Health",
+  "published_count": 188,
+  "last_run_at": "2026-06-20T21:44:48.308596Z",
   "topic_refills": 5
 }
