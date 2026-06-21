@@ -188,11 +188,12 @@
     "habits|||creating a consistent weekly review for improved productivity",
     "tech|||introduction to virtual private networks for online security",
     "health|||the importance of getting enough rest for physical health",
-    "career|||developing a professional online presence"
+    "career|||developing a professional online presence",
+    "habits|||creating a consistent bedtime routine for improved sleep"
   ],
-  "last_topic": "Developing a Professional Online Presence",
-  "last_category": "Career",
-  "published_count": 189,
-  "last_run_at": "2026-06-21T11:56:10.385053Z",
+  "last_topic": "Creating a Consistent Bedtime Routine for Improved Sleep",
+  "last_category": "Habits",
+  "published_count": 190,
+  "last_run_at": "2026-06-21T20:46:30.392472Z",
   "topic_refills": 5
 }
