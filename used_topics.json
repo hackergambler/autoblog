@@ -187,11 +187,12 @@
     "health|||the importance of practicing good hygiene for physical health",
     "habits|||creating a consistent weekly review for improved productivity",
     "tech|||introduction to virtual private networks for online security",
-    "health|||the importance of getting enough rest for physical health"
+    "health|||the importance of getting enough rest for physical health",
+    "career|||developing a professional online presence"
   ],
-  "last_topic": "The Importance of Getting Enough Rest for Physical Health",
-  "last_category": "Health",
-  "published_count": 188,
-  "last_run_at": "2026-06-20T21:44:48.308596Z",
+  "last_topic": "Developing a Professional Online Presence",
+  "last_category": "Career",
+  "published_count": 189,
+  "last_run_at": "2026-06-21T11:56:10.385053Z",
   "topic_refills": 5
 }
