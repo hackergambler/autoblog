@@ -190,11 +190,12 @@
     "health|||the importance of getting enough rest for physical health",
     "career|||developing a professional online presence",
     "habits|||creating a consistent bedtime routine for improved sleep",
-    "health|||the importance of incorporating fiber into your diet"
+    "health|||the importance of incorporating fiber into your diet",
+    "health|||the importance of nutrition for mental health"
   ],
-  "last_topic": "The Importance of Incorporating Fiber into Your Diet",
+  "last_topic": "The Importance of Nutrition for Mental Health",
   "last_category": "Health",
-  "published_count": 191,
-  "last_run_at": "2026-06-22T13:53:00.998408Z",
+  "published_count": 192,
+  "last_run_at": "2026-06-22T22:51:22.137821Z",
   "topic_refills": 5
 }
