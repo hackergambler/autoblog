@@ -204,11 +204,12 @@
     "health|||the importance of getting regular health check-ups",
     "tech|||introduction to digital marketing for small business owners",
     "health|||the importance of incorporating turmeric into your diet for anti-inflammatory benefits",
-    "finance|||how to navigate a stock market downturn"
+    "finance|||how to navigate a stock market downturn",
+    "tech|||introduction to cybersecurity for small business owners"
   ],
-  "last_topic": "How to Navigate a Stock Market Downturn",
-  "last_category": "Finance",
-  "published_count": 205,
-  "last_run_at": "2026-06-29T13:29:59.474841Z",
+  "last_topic": "Introduction to Cybersecurity for Small Business Owners",
+  "last_category": "Tech",
+  "published_count": 206,
+  "last_run_at": "2026-06-29T21:57:39.090913Z",
   "topic_refills": 5
 }
