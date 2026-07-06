@@ -217,11 +217,12 @@
     "habits|||creating a habit of regularly practicing stretching",
     "habits|||creating a consistent morning journaling practice",
     "tech|||building private cloud storage",
-    "productivity|||using the abc analysis for task management"
+    "productivity|||using the abc analysis for task management",
+    "habits|||creating a consistent exercise routine"
   ],
-  "last_topic": "Using the ABC Analysis for Task Management",
-  "last_category": "Productivity",
-  "published_count": 218,
-  "last_run_at": "2026-07-05T20:51:38.399789Z",
-  "topic_refills": 5
+  "last_topic": "Creating a Consistent Exercise Routine",
+  "last_category": "Habits",
+  "published_count": 219,
+  "last_run_at": "2026-07-06T11:51:26.840382Z",
+  "topic_refills": 6
 }
