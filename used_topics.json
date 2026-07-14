@@ -234,11 +234,12 @@
     "health|||the importance of incorporating probiotic-rich foods into your diet",
     "learning|||the benefits of learning to create a blog",
     "mindset|||cultivating optimism for improved mental health",
-    "finance|||understanding and managing investment risks"
+    "finance|||understanding and managing investment risks",
+    "tech|||introduction to machine learning for beginners"
   ],
-  "last_topic": "Understanding and Managing Investment Risks",
-  "last_category": "Finance",
-  "published_count": 235,
-  "last_run_at": "2026-07-14T09:29:38.098355Z",
+  "last_topic": "Introduction to Machine Learning for Beginners",
+  "last_category": "Tech",
+  "published_count": 236,
+  "last_run_at": "2026-07-14T20:44:30.332633Z",
   "topic_refills": 6
 }
