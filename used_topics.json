@@ -233,11 +233,12 @@
     "habits|||creating a habit of regularly practicing yoga for improved flexibility",
     "health|||the importance of incorporating probiotic-rich foods into your diet",
     "learning|||the benefits of learning to create a blog",
-    "mindset|||cultivating optimism for improved mental health"
+    "mindset|||cultivating optimism for improved mental health",
+    "finance|||understanding and managing investment risks"
   ],
-  "last_topic": "Cultivating Optimism for Improved Mental Health",
-  "last_category": "Mindset",
-  "published_count": 234,
-  "last_run_at": "2026-07-13T21:37:22.940472Z",
+  "last_topic": "Understanding and Managing Investment Risks",
+  "last_category": "Finance",
+  "published_count": 235,
+  "last_run_at": "2026-07-14T09:29:38.098355Z",
   "topic_refills": 6
 }
