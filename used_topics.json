@@ -238,11 +238,12 @@
     "tech|||introduction to machine learning for beginners",
     "health|||the importance of incorporating ginger into your diet",
     "mindset|||how to develop a strong sense of self",
-    "finance|||understanding credit scores and how to improve them"
+    "finance|||understanding credit scores and how to improve them",
+    "productivity|||using the kanban method for task management"
   ],
-  "last_topic": "Understanding Credit Scores and How to Improve Them",
-  "last_category": "Finance",
-  "published_count": 239,
-  "last_run_at": "2026-07-16T10:47:58.488358Z",
+  "last_topic": "Using the Kanban Method for Task Management",
+  "last_category": "Productivity",
+  "published_count": 240,
+  "last_run_at": "2026-07-16T20:18:42.231343Z",
   "topic_refills": 6
 }
