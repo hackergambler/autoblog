@@ -237,11 +237,12 @@
     "finance|||understanding and managing investment risks",
     "tech|||introduction to machine learning for beginners",
     "health|||the importance of incorporating ginger into your diet",
-    "mindset|||how to develop a strong sense of self"
+    "mindset|||how to develop a strong sense of self",
+    "finance|||understanding credit scores and how to improve them"
   ],
-  "last_topic": "How to Develop a Strong Sense of Self",
-  "last_category": "Mindset",
-  "published_count": 238,
-  "last_run_at": "2026-07-15T20:39:59.850820Z",
+  "last_topic": "Understanding Credit Scores and How to Improve Them",
+  "last_category": "Finance",
+  "published_count": 239,
+  "last_run_at": "2026-07-16T10:47:58.488358Z",
   "topic_refills": 6
 }
