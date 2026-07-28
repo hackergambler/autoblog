@@ -261,11 +261,12 @@
     "habits|||creating a habit of regularly practicing qigong",
     "finance|||how to create a budget for a major purchase",
     "productivity|||using the time blocking method for schedule management",
-    "learning|||the benefits of learning to create a mobile app"
+    "learning|||the benefits of learning to create a mobile app",
+    "learning|||the benefits of learning to create a video game"
   ],
-  "last_topic": "The Benefits of Learning to Create a Mobile App",
+  "last_topic": "The Benefits of Learning to Create a Video Game",
   "last_category": "Learning",
-  "published_count": 262,
-  "last_run_at": "2026-07-27T20:40:39.672319Z",
+  "published_count": 263,
+  "last_run_at": "2026-07-28T10:15:22.526812Z",
   "topic_refills": 6
 }
