@@ -262,11 +262,12 @@
     "finance|||how to create a budget for a major purchase",
     "productivity|||using the time blocking method for schedule management",
     "learning|||the benefits of learning to create a mobile app",
-    "learning|||the benefits of learning to create a video game"
+    "learning|||the benefits of learning to create a video game",
+    "health|||the importance of healthy eating for physical health"
   ],
-  "last_topic": "The Benefits of Learning to Create a Video Game",
-  "last_category": "Learning",
-  "published_count": 263,
-  "last_run_at": "2026-07-28T10:15:22.526812Z",
+  "last_topic": "The Importance of Healthy Eating for Physical Health",
+  "last_category": "Health",
+  "published_count": 264,
+  "last_run_at": "2026-07-28T22:11:32.709593Z",
   "topic_refills": 6
 }
