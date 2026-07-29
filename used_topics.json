@@ -263,11 +263,12 @@
     "productivity|||using the time blocking method for schedule management",
     "learning|||the benefits of learning to create a mobile app",
     "learning|||the benefits of learning to create a video game",
-    "health|||the importance of healthy eating for physical health"
+    "health|||the importance of healthy eating for physical health",
+    "finance|||understanding the benefits of a certificate of deposit"
   ],
-  "last_topic": "The Importance of Healthy Eating for Physical Health",
-  "last_category": "Health",
-  "published_count": 264,
-  "last_run_at": "2026-07-28T22:11:32.709593Z",
+  "last_topic": "Understanding the Benefits of a Certificate of Deposit",
+  "last_category": "Finance",
+  "published_count": 265,
+  "last_run_at": "2026-07-29T10:37:00.027767Z",
   "topic_refills": 6
 }
