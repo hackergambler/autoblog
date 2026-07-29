@@ -264,11 +264,12 @@
     "learning|||the benefits of learning to create a mobile app",
     "learning|||the benefits of learning to create a video game",
     "health|||the importance of healthy eating for physical health",
-    "finance|||understanding the benefits of a certificate of deposit"
+    "finance|||understanding the benefits of a certificate of deposit",
+    "productivity|||using the eisenhower matrix for decision making"
   ],
-  "last_topic": "Understanding the Benefits of a Certificate of Deposit",
-  "last_category": "Finance",
-  "published_count": 265,
-  "last_run_at": "2026-07-29T10:37:00.027767Z",
+  "last_topic": "Using the Eisenhower Matrix for Decision Making",
+  "last_category": "Productivity",
+  "published_count": 266,
+  "last_run_at": "2026-07-29T22:01:33.905455Z",
   "topic_refills": 6
 }
