@@ -284,11 +284,12 @@
     "health|||the importance of incorporating physical activity into your daily routine",
     "career|||effective strategies for creating a professional online presence",
     "career|||effective strategies for negotiating a freelance contract",
-    "health|||the importance of incorporating adaptogenic herbs into your diet"
+    "health|||the importance of incorporating adaptogenic herbs into your diet",
+    "tech|||introduction to blockchain technology for beginners"
   ],
-  "last_topic": "The Importance of Incorporating Adaptogenic Herbs into Your Diet",
-  "last_category": "Health",
-  "published_count": 285,
-  "last_run_at": "2026-08-08T09:25:24.830745Z",
+  "last_topic": "Introduction to Blockchain Technology for Beginners",
+  "last_category": "Tech",
+  "published_count": 286,
+  "last_run_at": "2026-08-08T21:22:13.104616Z",
   "topic_refills": 7
 }
