@@ -285,11 +285,12 @@
     "career|||effective strategies for creating a professional online presence",
     "career|||effective strategies for negotiating a freelance contract",
     "health|||the importance of incorporating adaptogenic herbs into your diet",
-    "tech|||introduction to blockchain technology for beginners"
+    "tech|||introduction to blockchain technology for beginners",
+    "tech|||introduction to data analysis for personal projects"
   ],
-  "last_topic": "Introduction to Blockchain Technology for Beginners",
+  "last_topic": "Introduction to Data Analysis for Personal Projects",
   "last_category": "Tech",
-  "published_count": 286,
-  "last_run_at": "2026-08-08T21:22:13.104616Z",
+  "published_count": 287,
+  "last_run_at": "2026-08-09T08:34:05.530227Z",
   "topic_refills": 7
 }
